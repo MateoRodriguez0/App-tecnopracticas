@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.proyecto.practicas</groupId>
-	<artifactId>API-tecnopracticas</artifactId>
+	<artifactId>tecnopracticas</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>API-tecnopracticas</name>
 	<description>Demo project for Spring Boot</description>
@@ -51,6 +51,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>

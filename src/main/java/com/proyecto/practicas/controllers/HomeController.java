@@ -1,6 +1,5 @@
 package com.proyecto.practicas.controllers;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/tecnopracticas")
 public class HomeController {
 
-    @GetMapping(value = "/home")
+    @GetMapping(value = "/")
     public String paginaPrincipal(){
 
         return pagPrincipal;
@@ -17,5 +16,5 @@ public class HomeController {
 
 
 
-    private static final String pagPrincipal="home";
+    private static final String pagPrincipal="principal/home";
 }

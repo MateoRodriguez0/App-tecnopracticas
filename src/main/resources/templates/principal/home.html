@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-    <link rel="shortcut icon" href="LogoTC.png" />
+    <link rel="shortcut icon" th:href="@{/images/home/LogoTC.png}" />
     <title>TecnoPracticas</title>
     
 
@@ -13,7 +13,8 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <img src="LogoTC.png" alt="" width="145px" height="">
+          <img th:src="@{/images/home/LogoTC.png}"alt="" width="145px" height="">
+          
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -34,13 +35,13 @@
       <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="Banner1.jpg" class="d-block w-100" alt="..." height="350px">
+            <img th:src="@{/images/home/Banner1.jpg}" class="d-block w-100" alt="..." height="350px">
           </div>
           <div class="carousel-item">
-            <img src="Banner2.jpg" class="d-block w-100" alt="..." height="350px">
+            <img th:src="@{/images/home/Banner2.jpg}" class="d-block w-100" alt="..." height="350px">
           </div>
           <div class="carousel-item">
-            <img src="Banner3.jpg" class="d-block w-100" alt="..." height="350px">
+            <img th:src="@{/images/home/Banner3.jpg}" class="d-block w-100" alt="..." height="350px">
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
@@ -108,9 +109,9 @@
                         </tr>
                    
                         <tr align="center">
-                            <td><a href="https://www.instagram.com/tecnologicocomfenalco/"> <img src="InstaL.webp" width="30px"></td></a>
-                            <td><a href="https://www.facebook.com/TComfenalco"> <img src="FaceL.png" width="30px"></td></a>
-                            <td><a href="https://twitter.com/tcomfenalco"> <img src="Xlog.png" width="30px"></td></a>
+                            <td><a href="https://www.instagram.com/tecnologicocomfenalco/"> <img th:src="@{/images/home/InstaL.webp}" width="30px"></td></a>
+                            <td><a href="https://www.facebook.com/TComfenalco"> <img th:src="@{/images/home/FaceL.png}" width="30px"></td></a>
+                            <td><a href="https://twitter.com/tcomfenalco"> <img th:src="@{/images/home/Xlog.png}" width="30px"></td></a>
                         </tr>
                     </table>
                 </center>

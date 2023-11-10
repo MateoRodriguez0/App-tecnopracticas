@@ -20,6 +20,7 @@ public class OfertaPractica {
 
     @Column(name = "nombre_oferta")
     private String nombre;
+    
     @Column(name = "descripcion")
     private String descripcion;
    /* @ManyToOne()

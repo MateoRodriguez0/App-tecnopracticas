@@ -1,7 +1,6 @@
 package com.proyecto.practicas.models;
 
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.Fetch;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

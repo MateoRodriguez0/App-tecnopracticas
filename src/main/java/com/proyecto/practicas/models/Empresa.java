@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.lang.reflect.Type;
 import java.util.List;
 
 @Entity
@@ -21,10 +20,16 @@ public class Empresa {
     private Long id;
     @Column(name = "nombre_completo")
     private String nombre;
+    
+    @Column(name = "NIT")
+    private Long nit;
+    
     @Column(name = "telefono")
     private String telefono;
+    
     @Column(name = "direccion")
     private String direccion;
+    
     @Email(message = "El Email no es valido.")
     @Column(name = "email")
     private String email;

@@ -18,7 +18,7 @@ public class Carrera {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "Nombre_carrera")
+    @Column(name = "nombre_carrera")
     private String nombre;
 
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "carrera")

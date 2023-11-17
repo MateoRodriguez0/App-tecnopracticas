@@ -1,11 +1,15 @@
 package com.proyecto.practicas.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+
+
+
 
 @Entity
 @Table(name ="ofertas_practicas")
@@ -18,12 +22,16 @@ public class OfertaPractica {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty(message = "El nombre de oferta no puede estar vacio")
     @Column(name = "nombre_oferta")
     private String nombre;
     
+    @NotEmpty(message = "El descripcion no puede estar vacio")
     @Column(name = "descripcion")
     private String descripcion;
-   /* @ManyToOne()
+
+    
+    /* @ManyToOne()
     @JoinColumn(name = "")
     private Usuario adimn;
 */
@@ -35,6 +43,7 @@ public class OfertaPractica {
     @JoinColumn(name = "IdCarrera")
     private Carrera carrera;
 
+   
     @Column(name = "fecha_publicacion")
     private Timestamp fecha;
 }

@@ -13,6 +13,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Postulacion {
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,11 +21,11 @@ public class Postulacion {
     private Timestamp fecha;
 
     @ManyToOne
-    @JoinColumn(name = "IdEstudiante")
+    @JoinColumn(name = "idEstudiante")
     private  Usuario estudiante;
 
     @ManyToOne
-    @JoinColumn(name = "IdOferta")
+    @JoinColumn(name = "idOferta")
     private Usuario oferta;
 
 }

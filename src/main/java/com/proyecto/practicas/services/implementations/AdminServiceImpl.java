@@ -1,5 +1,8 @@
 package com.proyecto.practicas.services.implementations;
 
+import com.proyecto.practicas.repositories.OfertaRepository;
+import com.proyecto.practicas.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.proyecto.practicas.models.OfertaPractica;
@@ -32,4 +35,20 @@ public class AdminServiceImpl implements AdminServices {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Autowired
+	private OfertaRepository ofertaRepository;
+
+	@Override
+	public void publicarOferta(OfertaPractica ofertaPractica){
+		ofertaRepository.save(ofertaPractica);
+	}
+
+	@Override
+	public void actualizarOferta(OfertaPractica ofertaPractica){
+	}
+
+	@Override
+	public void eliminarOferta(Long id) {
+		}
 }

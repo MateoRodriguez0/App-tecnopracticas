@@ -18,19 +18,20 @@ public class CarreraServicesImpl implements CarreraServices {
 
 	@Override
 	public void guardarCarrera(Carrera carrera) {
-		// TODO Auto-generated method stub
 		
+		carreraRepository.save(carrera);
 	}
 
 	@Override
 	public Carrera getCarreraById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		
+		return carreraRepository.findById(id).orElse(null);
 	}
 
 	@Override
 	public List<Carrera> getCarreras() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return carreraRepository.findAll();
 	}
 }

@@ -18,24 +18,6 @@ public class AdminServiceImpl implements AdminServices {
 		
 	}
 
-	@Override
-	public void publicarOferta(OfertaPractica ofertaPractica) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void actualizarOferta(OfertaPractica ofertaPractica) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void eliminarOferta(Long id) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	@Autowired
 	private OfertaRepository ofertaRepository;
 
@@ -50,5 +32,6 @@ public class AdminServiceImpl implements AdminServices {
 
 	@Override
 	public void eliminarOferta(Long id) {
-		}
+		ofertaRepository.deleteById(id);
+	}
 }

@@ -15,6 +15,13 @@ public class HomeController {
     }
 
 
+    @GetMapping(value = "/programas")
+    public String carrerasDisponibles(){
+
+        return pagPracticas;
+    }
 
     private static final String pagPrincipal="principal/home";
+    
+    private static final String pagPracticas="CarrerasDisp/CarrerasDisp";
 }

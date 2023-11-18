@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300&display=swap" rel="stylesheet">
+    <title>Inicia Sesion</title>
+  	<link rel="shortcut icon" th:href="@{/images/favicon/LogoComfe.ico}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/css/Login/Login.css}">
+
+</head>
+<body>
+    <form th:action="@{login/auth}" method="post">
+        <h2>Inicia Sesion</h2>
+
+        <label for="username">Correo Institucional</label>
+        <input type="email" id="correo" required>
+
+        <label for="password">Contraseña</label>
+        <input type="password"  id="contraseña" required>
+
+        <div class="recordar">
+           <p>Recordar</p>
+           <p>Olvide Contraseña</p>
+        </div>
+
+        <input type="submit" class="btn1" value="Iniciar Sesion">
+
+
+    </form>
+    
+</body>
+</html>

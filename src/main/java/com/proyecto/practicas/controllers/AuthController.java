@@ -20,7 +20,7 @@ public class AuthController {
     private static final String urlFormularioLogin="Formularios/Login/Login";
     private static final String urlFormularioSingUP="Formularios/Register/Register";
     private static final String urlRedirectCarreras="redirect:/tecnopracticas/programas";
-    
+    private static final String registro="";
 	
 
     @GetMapping(value = "/login")
@@ -44,10 +44,10 @@ public class AuthController {
     }
 	
     
-    @PostMapping()
+    @PostMapping(value = "/Singup")
     public String crearCuenta(@Valid Usuario usuario,BindingResult bindingResult,Model model) {
 		
-		
+    	
     	return null;
     }
     
@@ -55,4 +55,8 @@ public class AuthController {
     
     @Autowired
     private UserService userService;
+    
+    /*@Autowired
+	private PasswordEncoder passwordEncoder;
+	*/
 }

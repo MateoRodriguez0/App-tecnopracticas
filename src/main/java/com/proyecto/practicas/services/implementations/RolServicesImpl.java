@@ -18,7 +18,9 @@ public class RolServicesImpl implements RolServices {
 	@Override
 	public Rol getRolById(Long id) {
 		
-		return null;
+		return rolRepository
+				.findById(id)
+				.orElse(null);
 	}
 
 	@Override

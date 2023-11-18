@@ -6,7 +6,7 @@ import com.proyecto.practicas.models.Empresa;
 
 public interface EmpresaServices {
 	
-	Void guardarEmpresa(Empresa empresa);
+	void guardarEmpresa(Empresa empresa);
 	
 	
 	Empresa getEmpresaByid(Long id);

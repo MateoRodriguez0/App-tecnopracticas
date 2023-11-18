@@ -18,7 +18,7 @@ public class OfertaServicesImpl implements OfertaServices {
 
 	@Override
 	public List<OfertaPractica> getOfertas() {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 }

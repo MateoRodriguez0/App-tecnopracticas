@@ -26,6 +26,6 @@ public class RolServicesImpl implements RolServices {
 	@Override
 	public List<Rol> getRoles() {
 		
-		return null;
+		return rolRepository.findAllOrderByNombre();
 	}
 }

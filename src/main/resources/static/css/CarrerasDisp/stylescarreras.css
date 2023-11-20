@@ -1,109 +1,100 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;  
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /*CUERPO*/
 
-body{
-    font-family: 'Mulish', sans-serif;
-    
+body {
+  font-family: "Mulish", sans-serif;
 }
 /*HEADER*/
 
-.navegacion{
-    background-color: #00589e;
-    height: 20px 20px 20px 20px;
-    display: flex;
-    
+.navegacion {
+  background-color: #00589e;
+  height: 20px 20px 20px 20px;
+  display: flex;
 }
-.navimagen{
-    padding: 25px 45px 25px 25px;
-    background-color: #FFFF;
-    border-radius: 30px;
-    margin-left: 2%;
-    margin-top: 2%;
-    margin-bottom: 2%;
-    
+.navimagen {
+  padding: 25px 45px 25px 25px;
+  background-color: #ffff;
+  border-radius: 30px;
+  margin-left: 2%;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
-
-.btnverperfil{
-    
-    background-color: #FF0000;
-    border-radius: 30px;
-    padding: 5px 5px 5px 5px;
-    color: #FFFF;
-    margin-top: 100%;
-    margin-left: 1700%;
-    width: max-content;
-    outline: none;
+.titulocarrera {
+  color: #ffff;
+  margin-top: 5%;
+  margin-left: 20%;
+}
+@media (max-width: 991px) {
+  .navimagen {
+    width: 30%;
+  }
 }
 
-.btnverperfil:hover{
-    background-color:#d4152b;
-    cursor:pointer;
-    
+.btnverperfil {
+  background-color: #ff0000;
+  border-radius: 30px;
+  padding: 5px 5px 5px 5px;
+  color: #ffff;
+  margin-top: 100%;
+  margin-left: 1500%;
+  width: max-content;
+  outline: none;
 }
 
-/*Tarjeta de software*/
-
-.card-soft{
-
-width: 20%;
-margin-top: 5%;
-margin-left: 5%;
-border-radius: 10px;
-box-shadow: 0px 0px 20px #00589e;
-background-color: #FFFF;
+.btnverperfil:hover {
+  background-color: #d4152b;
+  cursor: pointer;
 }
 
- .imgsoft{
-    width: 100%;
-    border-radius: 10px;
+/*Tarjeta de carreras*/
+
+.container-mt4 {
+  width: 10%;
 }
 
-
-.btn{
-    margin-left: 120px;
-    margin-bottom: 5%;
+.card-soft {
+  margin-top: 5%;
+  margin-left: 5%;
+  width: fit-content;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px #00589e;
+  background-color: #ffff;
 }
 
-/*Tarjeta de ambiental*/
-
-.carding-amb{
-    width: 20%;
-    margin-top: -21%;
-    margin-left: 40%;
-    border-radius: 10px;
-    box-shadow: 0px 0px 20px #00589e;
-    background-color: #FFFF;
+.imgsoft {
+  width: 100%;
+  border-radius: 10px;
 }
 
-.imgamb{
-    width: 100%;
-    border-radius: 10px;
+.btn {
+  margin-left: 130px;
+  margin-bottom: 5%;
+}
+
+@media (max-width: 991px) {
+  .btn {
+    margin-left: 35px;
+  }
 }
 
 /*TITULOS DE LAS TARJETAS*/
-.card-title{
-    margin-top: 10px;
-    text-align: center;
-    color: #00589e;
+.card-title {
+  margin-top: 10px;
+  text-align: center;
+  color: #00589e;
 }
-.card-text{
-    text-align: center;
+.card-text {
+  text-align: center;
 }
 
-@media (max-width: 991px){
-    
-    .navegacion{
-        flex-direction: column;
-    }
-    .btnverperfil{
-        margin-left: 0%;
-        margin-top: 2%;
-    }
-
+@media (max-width: 991px) {
+  .btnverperfil {
+    margin-left: 600%;
+    margin-top: 50%;
+  }
 }
-    

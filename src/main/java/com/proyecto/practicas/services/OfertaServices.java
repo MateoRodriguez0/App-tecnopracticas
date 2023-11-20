@@ -10,5 +10,6 @@ public interface OfertaServices {
 
 	List<OfertaPractica> getOfertas();
 	
+	List<OfertaPractica> getOfertasPorCarrera(Long id);
 	
 }

@@ -14,6 +14,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class Postulacion {
 	
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,7 +27,7 @@ public class Postulacion {
 
     @ManyToOne
     @JoinColumn(name = "idOferta")
-    private Usuario oferta;
+    private OfertaPractica oferta;
 
 }
 

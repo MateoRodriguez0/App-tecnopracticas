@@ -10,7 +10,8 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
-    @Override
+    
+	@Override
     public Usuario updateUser(Long userId, Usuario updatedUser) {
         return null;
     }
@@ -34,4 +35,14 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+
+	@Override
+	public Usuario getUsuarioByEmail(String email) {
+		
+		
+		return userRepository
+				.findByEmail(email)
+				.orElse(null);
+	}
 }

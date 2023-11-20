@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.proyecto.practicas.models.VerificationCode;
 
 @FeignClient(url = "http://localhost:8080")
-public interface VerifcacionEmailClient {
+public interface VerificacionEmailClient {
 
 
 	@PostMapping("/mail/enviar")

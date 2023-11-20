@@ -63,6 +63,9 @@ public class Usuario {
 	@NotEmpty(message = "El campo verificación de contraseña no puede estar vacio")
 	private String passwordValid;
     
+    @Column(name = "enable")
+    private Boolean enable;
+    
     @OneToOne
     @JoinColumn(name = "IdRol")
     private Rol rol;

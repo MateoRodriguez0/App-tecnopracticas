@@ -33,10 +33,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    @Autowired
-    private UserRepository userRepository;
-
-
+  
 	@Override
 	public Usuario getUsuarioByEmail(String email) {
 		
@@ -45,4 +42,24 @@ public class UserServiceImpl implements UserService {
 				.findByEmail(email)
 				.orElse(null);
 	}
+	
+	
+	
+	  @Autowired
+	    private UserRepository userRepository;
+
+
+
+	@Override
+	public void registrarUsuario(Usuario usuario) {
+		
+		usuario.setEnable(false);
+		//usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+		userRepository.save(usuario);
+	}
+
+	    /*@Autowired
+	   	private PasswordEncoder passwordEncoder;
+	   	*/
+
 }

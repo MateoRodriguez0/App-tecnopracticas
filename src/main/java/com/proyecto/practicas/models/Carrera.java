@@ -19,12 +19,15 @@ public class Carrera {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    
     @Column(name = "urlImagen")
     private String urlImagen;
+    
     
     @Column(name = "nombre_carrera")
     private String nombre;
 
+    
     @Column(name = "descripcion")
     private String descripcion;
     

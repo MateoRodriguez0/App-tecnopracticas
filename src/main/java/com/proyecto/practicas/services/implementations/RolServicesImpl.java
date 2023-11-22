@@ -5,6 +5,7 @@ import com.proyecto.practicas.repositories.RolRepository;
 import com.proyecto.practicas.services.RolServices;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,9 @@ public class RolServicesImpl implements RolServices {
 	@Override
 	public List<Rol> getRoles() {
 		
-		return rolRepository.findAllOrderByNombre();
+		return rolRepository.findAll()
+				.stream()
+				.sorted((rol1, rol2) ->rol1.getNombre().compareTo(rol2.getNombre()))
+				.collect(Collectors.toList());
 	}
 }

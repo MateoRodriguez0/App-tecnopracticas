@@ -17,7 +17,7 @@ public class AuthController {
  
 	
 
-    @GetMapping(value = "/login")
+    @GetMapping(value = "/cuentas/login")
     public String getFormLogin(){
 
         return urlFormularioLogin;

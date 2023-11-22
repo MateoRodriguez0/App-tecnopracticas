@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.proyecto.practicas.models.VerificationCode;
 
-@FeignClient(url = "http://localhost:8080")
+@FeignClient( name = "email",url = "http://localhost:9050")
 public interface VerificacionEmailClient {
 
 

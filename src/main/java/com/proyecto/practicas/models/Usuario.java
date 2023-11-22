@@ -63,8 +63,9 @@ public class Usuario {
 	@NotEmpty(message = "El campo verificación de contraseña no puede estar vacio")
 	private String passwordValid;
     
+    
     @Column(name = "enable")
-    private Boolean enable;
+    private boolean enable;
     
     @OneToOne
     @JoinColumn(name = "IdRol")
@@ -93,6 +94,7 @@ public class Usuario {
 	public Boolean esMayordeEdad() {
 		LocalDate fechaNacimiento=fNacimiento.toLocalDate();
 		Period periodo=Period.between(fechaNacimiento, LocalDate.now());
+		
 		
 		return periodo.getYears()>=18;
 	}

@@ -16,6 +16,7 @@ import com.proyecto.practicas.models.VerificationCode;
 import com.proyecto.practicas.services.RolServices;
 import com.proyecto.practicas.services.UserService;
 
+import feign.FeignException;
 import jakarta.validation.Valid;
 
 @Controller
@@ -25,30 +26,41 @@ public class RegistroController {
     @GetMapping(value = "/cuentas/singup")
     public String getFormSingUp(Usuario usuario){
 
+    	usuario.setEmail("ssdsd");
+    	usuario.setNombre("ds");
+    	usuario.setTelefono("dsds");
+    	usuario.setPassword("sdsd");
+    	usuario.setPasswordValid("dsddsds");
+    	
         return urlFormularioSingUP;
     }
 
     
-    @PostMapping(value = "/cuentas/Singup")
+    @PostMapping(value = "/cuentas/singup")
     public String crearCuenta(@Valid Usuario usuario,BindingResult bindingResult,Model model) {
 		
     	if(bindingResult.hasErrors() || !usuario.validPasword() ||
-    			userService.ExistUserByEmail(usuario.getEmail())|| usuario.esMayordeEdad()) {
+    			userService.ExistUserByEmail(usuario.getEmail())|| !usuario.esMayordeEdad()) {
     		
+    		
+    		System.out.println(bindingResult.getErrorCount());
     		return urlFormularioSingUP;
     	}
+   
     	
     	
-    	userService.registrarUsuario(usuario);
-    	
-    	if(emailClient.enviarCorreo(usuario.getEmail()).getStatusCode().equals(HttpStatus.NO_CONTENT)) {
+    	try {
+    		usuario.setEnable(false);
+    		userService.registrarUsuario(usuario);
     		
+    		emailClient.enviarCorreo(usuario.getEmail());
     		model.addAttribute("emailConValidacionPendiente", usuario.getEmail());
     		
     		return redirecturlFormularioVerificacionEmail;
-    	}
-    	
-    	return urlFormularioSingUP;
+    		
+    	}catch (FeignException e) {
+    		return urlFormularioSingUP;
+		}
     	
     	
     }
@@ -112,7 +124,7 @@ public class RegistroController {
     private VerificacionEmailClient emailClient;
     
     private static final String urlVerificacionEmail="";
-    private static final String redirecturlFormularioVerificacionEmail="redirect:tecnopracticas/cuentas/Singup/verificacion";
+    private static final String redirecturlFormularioVerificacionEmail="redirect:/tecnopracticas/cuentas/singup/verificacion";
     private static final String urlFormularioSingUP="Formularios/Register/Register";
     private static final String urlFormularioLogin="Formularios/Login/Login";
 }

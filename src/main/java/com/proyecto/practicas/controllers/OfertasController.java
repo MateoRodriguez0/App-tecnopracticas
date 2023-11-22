@@ -19,13 +19,13 @@ public class OfertasController {
 	
 	private final String urlOfertas="";
 	
-	@GetMapping(value = "/carrea/ofertas/{id}")
+	@GetMapping(value = "/carrera/ofertas/{id}")
 	public String getOfertasPorCarrera(@PathVariable(name = "id")Long id,Model model) {
 		
 		List<OfertaPractica> ofertas=ofertaServices.getOfertasPorCarrera(id);
 		
 		model.addAttribute("ofertas", ofertas);
-		System.out.println(id);
+		
 		
 		return urlOfertas;
 	}

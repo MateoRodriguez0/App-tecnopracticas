@@ -18,9 +18,11 @@ public class Empresa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+   /* @Transient
     @Column(name = "nombre_completo")
     private String nombre;
-    
+   */ 
     @Column(name = "NIT")
     private Long nit;
     

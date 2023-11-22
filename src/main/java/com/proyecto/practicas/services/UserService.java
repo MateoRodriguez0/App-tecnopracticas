@@ -1,3 +1,4 @@
+
 package com.proyecto.practicas.services;
 
 
@@ -17,5 +18,6 @@ public interface UserService {
     
     Usuario getUsuarioByEmail(String email);
 
+    void registrarUsuario(Usuario usuario);
 
 }

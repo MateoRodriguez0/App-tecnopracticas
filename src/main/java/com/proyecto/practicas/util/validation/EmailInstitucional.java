@@ -11,7 +11,7 @@ import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
 
-@Constraint(validatedBy = { })
+@Constraint(validatedBy = {EmailEstudiantilValidation.class })
 @Target(FIELD)
 @Retention(RUNTIME)
 public @interface EmailInstitucional {

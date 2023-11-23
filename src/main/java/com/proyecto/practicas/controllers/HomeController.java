@@ -17,7 +17,7 @@ import java.util.*;
 @RequestMapping(value = "/tecnopracticas")
 public class HomeController {
 
-    @GetMapping(value = "/")
+    @GetMapping()
     public String paginaPrincipal(){
 
         return pagPrincipal;

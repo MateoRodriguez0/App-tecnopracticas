@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.proyecto.practicas.models.OfertaPractica;
+import com.proyecto.practicas.services.CarreraServices;
 import com.proyecto.practicas.services.OfertaServices;
 
 @Controller
@@ -17,7 +18,7 @@ import com.proyecto.practicas.services.OfertaServices;
 public class OfertasController {
 	
 	
-	private final String urlOfertas="";
+	private final String urlOfertas="ofertas/Ofertas";
 	
 	@GetMapping(value = "/carrera/ofertas/{id}")
 	public String getOfertasPorCarrera(@PathVariable(name = "id")Long id,Model model) {
@@ -25,11 +26,18 @@ public class OfertasController {
 		List<OfertaPractica> ofertas=ofertaServices.getOfertasPorCarrera(id);
 		
 		model.addAttribute("ofertas", ofertas);
-		
+		model.addAttribute("carrera", carreraServices.getCarreraById(id));
 		
 		return urlOfertas;
 	}
 	
+	
+	
+	
+	
 	@Autowired
 	private OfertaServices ofertaServices;
+	
+	@Autowired
+	private CarreraServices carreraServices;
 }

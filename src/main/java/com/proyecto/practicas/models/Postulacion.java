@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name ="carreras")
+@Table(name ="postulaciones")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

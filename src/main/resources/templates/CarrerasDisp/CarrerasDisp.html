@@ -33,7 +33,7 @@
         <img th:src="@{/images/LogoHeader.png}" class="navimagen" />
         <!--Boton de ver perfil-->
         <div>
-          <button id="btnperfil" class="btnverperfil">Ver Perfil</button>
+          <a th:href="@{/tecnopracticas/myaccount}"><button id="btnperfil" class="btnverperfil">Ver Perfil</button></a> 
         </div>
         <h4 class="titulocarrera">Programas Academicos</h4>
 
@@ -51,11 +51,8 @@
             <div class="card-body">
               <h5 class="card-title" th:text="${carrera.nombre}"></h5>
               <p class="card-text" th:text="${carrera.descripcion}"></p>
-              <a
-                th:href="@{/tecnopracticas/carrea/ofertas/{id} (id= ${carrera.id})}"
-              >
-                <button class="btn btn-primary">Ver información</button></a
-              >
+              <a th:href="@{/tecnopracticas/carrera/ofertas/{id} (id= ${carrera.id})}">
+                <button class="btn btn-primary">Ofertas disponibles</button></a>
             </div>
           </div>
         </div>

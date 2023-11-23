@@ -41,7 +41,7 @@
         <div class="row">
             <div class="col-sm-12 col-md- col-lg-6 col-xl-6">
             <br><br><br><br>
-                    <h2 th:text="'Practicas de'+ ${carrera.nombre}"></h2>
+                    <h2 th:text="'Practicas de '+ ${carrera.nombre}"></h2>
 
             </div>
 
@@ -102,8 +102,8 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                                         </div>
 
-                                        <div class="modal-body">
-                                            <p>Estamos buscando un programador junior apasionado por el desarrollo web y con experiencia en JavaScript. En este puesto, serás responsable de colaborar en el desarrollo y mantenimiento de aplicaciones web utilizando tecnologías como HTML, CSS y JavaScript. Si tienes conocimientos en frameworks como React o Angular, ¡será un plus! Únete a nuestro equipo y forma parte de proyectos</p>
+                                        <div class="modal-body" >
+                                            <p th:utext="${oferta.descripcion}"></p>
                                         </div>
 
                                         <div class="modal-footer">

@@ -15,7 +15,7 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <img th:src="@{/images/LogoTC.png}"  alt="" width="145px" height="">
+          <a th:href="@{/tecnopracticas/programas}" ><img th:src="@{/images/LogoTC.png}"  alt="" width="145px" height=""></a> 
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -64,7 +64,7 @@
       
     <div class="container">
         <div class="row">
-            <div class="col-sm-12 col-md- col-lg-9 col-xl-9">
+            <div th:each="oferta: ${ofertas}" class="col-sm-12 col-md- col-lg-9 col-xl-9">
             
 
                 <table class="table table-sm">
@@ -78,18 +78,14 @@
                         Empresa
                       </th>
 
-                      <th style="text-align: center;">
-                        Asunto
-                      </th>
+                      <th style="text-align: center;" th:text="${oferta.nombre}"> </th>
                     </thead>
                     <tbody>
                       <td style="text-align: center;">
                         01
                       </td>
 
-                      <td style="text-align: center;">
-                        AWS
-                      </td>
+                      <td style="text-align: center;" th:text="${oferta.empresa.nombre}"></td>
 
                       <td >
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis possimus eos quam sint quo cupiditate velit similique et quasi molestias amet nisi perspiciatis eligendi laudantium distinctio, incidunt dolor numquam, quia praesentium ex molestiae. Aspernatur vero illo ex consequuntur, praesentium nobis dolorem sit voluptate fugit voluptas aliquid sunt ipsum. Hic rerum, optio facere mollitia harum praesentium blanditiis officia fugiat ducimus consectetur non odio inventore aspernatur esse dolorum molestiae explicabo repellendus? Dicta saepe autem totam quibusdam nostrum recusandae facilis nisi praesentium eius, voluptatibus porro accusantium, hic et soluta eveniet ex modi magni fugit nemo rerum suscipit. Eius nam eos quasi fugiat velit?

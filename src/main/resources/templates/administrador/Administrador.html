@@ -65,8 +65,8 @@
 				<table class="table">
 					<tr>
 						<th scope="col">ID</th>
-						<th scope="col">Nombre</th>
 						<th scope="col">Correo</th>
+						<th scope="col">Oferta</th>
 						<th scope="col">Fecha en la que se aplicó</th>
 						<th scope="col">Programa</th>
 						<th scope="col">Empresa</th>
@@ -76,13 +76,13 @@
 					</thead>
 					<tbody id="tableB">
 						<tr th:each=" postulacion: ${postulaciones}">
-							<th scope="row">1</th>
-							<td th:text="${postulacion.}">Cristian</td>
-							<td>email</td>
+							<th scope="row" th:text="${postulacion.id}">1</th>
+							<td th:text="${postulacion.estudiante.email}" ></td>
+							<td th:text="${postulacion.oferta.nombre}"></td>
 							<td th:text="${postulacion.fecha}"></td>
 							<td th:text="${postulacion.oferta.carrera.nombre}"></td>
 							<td th:text="${postulacion.oferta.empresa.nombre}"></td>
-							<td th:text="${postulacion.estado}">Visto</td>
+							<td th:text="${postulacion.estado}"></td>
 						</tr>
 
 
@@ -96,7 +96,7 @@
 				<h1>Gestion de las ofertas</h1>
 				</p>
 				<br>
-				<button onclick="location.href='#'">Ver</button>
+				<a th:href="@{/tecnopracticas/programas}"><button>Ver</button></a> 
 			</div>
 		</div>
 	</div>

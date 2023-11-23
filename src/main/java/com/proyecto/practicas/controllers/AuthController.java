@@ -43,7 +43,7 @@ public class AuthController {
     }
 
     
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public RedirectView logout (HttpServletRequest request, HttpSession session) {
     	
     		
@@ -57,7 +57,7 @@ public class AuthController {
     	SecurityContextHolder.clearContext();
     		
     		
-    		return new RedirectView("");
+    		return new RedirectView("/tecnopracticas");
     	}
     
 

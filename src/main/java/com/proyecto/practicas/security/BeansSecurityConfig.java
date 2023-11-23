@@ -31,7 +31,7 @@ public class BeansSecurityConfig {
 		.permitAll()
 		.requestMatchers("/tecnopracticas/cuentas/login")
 		.permitAll()
-		.requestMatchers("/tecnopracticas")
+		.requestMatchers("/tecnopracticas","/tecnopracticas/cuentas/singup","/tecnopracticas/cuentas/login")
 		.anonymous()
 		.requestMatchers("/tecnopracticas/")
 		.hasAnyAuthority("ESTUDIANTE","ADMINISTRADOR")

@@ -30,6 +30,9 @@ public class Postulacion {
     @ManyToOne
     @JoinColumn(name = "idOferta")
     private OfertaPractica oferta;
+    
+    @Column(name = "estado")
+    private String estado;
 
 }
 

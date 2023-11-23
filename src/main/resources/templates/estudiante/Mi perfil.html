@@ -98,8 +98,8 @@
       </thead>
       <tbody id="tableB">
         <tr th:each=" postulacion: ${mispostulaciones}">
-          <th scope="row">1</th>
-          <td th:text="${postulacion.}">Cristian</td>
+          <th scope="row" th:text="${postulacion.id}"></th>
+          <td th:text="${postulacion.oferta.nombre}"></td>
           <td >email</td>
           <td th:text="${postulacion.fecha}"></td>
           <td th:text="${postulacion.oferta.carrera.nombre}"></td>

@@ -26,7 +26,9 @@ public class EstudianteServicesImpl implements EstudianteServices{
 		Postulacion postulacion= Postulacion.builder()
 		.estudiante(usuario)
 		.oferta(ofertaPractica)
-		.fecha(new Timestamp(System.currentTimeMillis())).build();
+		.fecha(new Timestamp(System.currentTimeMillis()))
+		.estado("No visto")
+		.build();
 		
 		postulacionRepository.save(postulacion);
 	}

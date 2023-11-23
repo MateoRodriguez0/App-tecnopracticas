@@ -58,8 +58,14 @@ public class UserServiceImpl implements UserService {
 		userRepository.save(usuario);
 	}
 
-	    /*@Autowired
-	   	private PasswordEncoder passwordEncoder;
+	@Override
+	public String getnameByEmail(String email) {
+		
+		return getUsuarioByEmail(email).getNombre();
+	}
+
+/*@Autowired
+ private PasswordEncoder passwordEncoder;
 	   	*/
 
 }

@@ -3,20 +3,20 @@ package com.proyecto.practicas.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.servlet.view.RedirectView;
 import com.proyecto.practicas.models.Postulacion;
 import com.proyecto.practicas.models.Usuario;
 import com.proyecto.practicas.services.EstudianteServices;
+import com.proyecto.practicas.services.OfertaServices;
 import com.proyecto.practicas.services.UserService;
 
-import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping(value = "/tecnopracticas/estudiante")
@@ -37,13 +37,14 @@ public class EsudianteController {
 	
 	
 	
-	@PostMapping(value = "/postulaciones/nueva")
-	public String guardarPostulacion(@Valid Postulacion postulacion,BindingResult bindingResult){
+	@GetMapping(value = "/oferta/{id}/postulacion/nueva")
+	public RedirectView savePostulcion(@PathVariable(name = "id")Long idOferta,Authentication authentication, Model model) {
 		
-		estudianteServices.guardarPostulacion(postulacion);
+		estudianteServices.guardarPostulacion(ofertaServices.getOfertaById(idOferta), authentication);
 		
-		return urlRedirectpostulaciones;
+		return new RedirectView(RedirectPerfil);
 	}
+	
 	
 	
 	@PostMapping(value = "/postulaciones/eliminar/{id}")
@@ -60,7 +61,11 @@ public class EsudianteController {
 	
 	private final String urlRedirectpostulaciones="redirect:/tecnopracticas/estudiante/postulaciones";
 	
+	private final String RedirectPerfil="/tecnopracticas/myaccount";
 	
+	@Autowired
+	private OfertaServices ofertaServices;
+
 	
 	@Autowired
 	private EstudianteServices estudianteServices;

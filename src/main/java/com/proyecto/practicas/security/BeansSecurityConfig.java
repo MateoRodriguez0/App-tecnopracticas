@@ -3,9 +3,6 @@ package com.proyecto.practicas.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.ProviderManager;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -30,16 +27,23 @@ public class BeansSecurityConfig {
 		http.authorizeHttpRequests(httpCustom -> 
 		
 		httpCustom
-		.requestMatchers("/css/**","/images/**","/js/**").permitAll()
-		.requestMatchers("/tecnopracticas/cuentas/login").permitAll()
-		.requestMatchers("/tecnopracticas").permitAll()
-		.requestMatchers("/tecnopracticas/").hasAnyAuthority("ESTUDIANTE","ADMINISTRADOR")
-		.requestMatchers("/tecnopracticas/").hasAuthority("")
-		.requestMatchers("/tecnopracticas/").hasAuthority("")
-		.requestMatchers("/tecnopracticas/").hasAuthority("")
+		.requestMatchers("/css/**","/images/**","/js/**")
+		.permitAll()
+		.requestMatchers("/tecnopracticas/cuentas/login")
+		.permitAll()
+		.requestMatchers("/tecnopracticas")
+		.anonymous()
+		.requestMatchers("/tecnopracticas/")
+		.hasAnyAuthority("ESTUDIANTE","ADMINISTRADOR")
+		.requestMatchers("/tecnopracticas/carrera/ofertas/**")
+		.hasAnyAuthority("ESTUDIANTE","ADMINISTRADOR")
+		.requestMatchers("/tecnopracticas/myaccount")
+		.hasAnyAuthority("ESTUDIANTE","ADMINISTRADOR")
+		.requestMatchers("/tecnopracticas/logout").authenticated()
 		.anyRequest().authenticated())
-		
-		.formLogin(Customizer.withDefaults());
+
+		.formLogin(login ->login.loginPage("/tecnopracticas/cuentas/login").permitAll());
+		http.logout(Customizer.withDefaults());
 		return http.build();
 	}
 	

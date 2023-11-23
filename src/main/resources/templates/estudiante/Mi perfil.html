@@ -53,7 +53,7 @@
         
             <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
                 <br>
-                <h5><p>Nombre del perfil</p></h5>
+                <h5><p th:text="${nombre_usuario}"></p></h5>
             </div>
 
 
@@ -97,26 +97,17 @@
         </tr>
       </thead>
       <tbody id="tableB">
-        <tr>
+        <tr th:each=" postulacion: ${mispostulaciones}">
           <th scope="row">1</th>
-          <td>Cristian</td>
-          <td>Ramirez</td>
-          <td >Septiembre 15/2023 - 9:12</td>
-          <td>Desarrollo de software</td>
-          <td>AWS</td>
-          <td>Visto</td>
+          <td th:text="${postulacion.}">Cristian</td>
+          <td >email</td>
+          <td th:text="${postulacion.fecha}"></td>
+          <td th:text="${postulacion.oferta.carrera.nombre}"></td>
+          <td th:text="${postulacion.oferta.empresa.nombre}"></td>
+          <td th:text="${postulacion.estado}">Visto</td>
         </tr>
         
-        <tr>
-          <th scope="row">2</th>
-          <td>Jose</td>
-          <td>Morales</td>
-          <td >Octubre 10/2023 - 4:12</td>
-          <td>Desarrollo de software</td>
-          <td>MercadoLibre</td>
-          <td>No Visto</td>
-        </tr>
-        
+      
       </tbody>
     </table>
   </div>

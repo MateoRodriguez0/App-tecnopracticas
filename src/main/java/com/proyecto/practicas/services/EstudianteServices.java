@@ -1,13 +1,13 @@
 package com.proyecto.practicas.services;
 
-import com.proyecto.practicas.models.Postulacion;
-import com.proyecto.practicas.models.Usuario;
+import org.springframework.security.core.Authentication;
+
+import com.proyecto.practicas.models.OfertaPractica;
 
 public interface EstudianteServices {
 	
-	void RegistrarAdmin(Usuario usuario);
 	
-	void guardarPostulacion(Postulacion postulacion);
+	void guardarPostulacion(OfertaPractica ofertaPractica,Authentication authentication);
 	
 	void eliminarPostulacion(Long id);
 	

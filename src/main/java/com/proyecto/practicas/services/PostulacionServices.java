@@ -8,7 +8,8 @@ public interface PostulacionServices {
 	
 	List<Postulacion> getPostulacionesByOferta(Long id);
 	
-	List<Postulacion> getPostulacionesByEstudiante(Long id);
+	List<Postulacion> getPostulacionesByEstudiante(String email);
 	
+	List<Postulacion> getAllPostulaciones();
 	
 }

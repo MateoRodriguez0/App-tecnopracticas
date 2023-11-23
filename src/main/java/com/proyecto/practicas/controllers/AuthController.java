@@ -1,14 +1,15 @@
 package com.proyecto.practicas.controllers;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.view.RedirectView;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 
@@ -33,16 +34,32 @@ public class AuthController {
 
 
 
-    @PostMapping(value = "/cuentas/login/auth")
-    public String authenticated(Authentication authentication ,HttpSession  httpSession) {
+    @GetMapping(value = "/cuentas/login/auth")
+    public String authenticated(Authentication authentication,HttpSession  httpSession) {
     	
-    	System.out.println(authentication.getName());
+    	
     	
     	return urlRedirectCarreras;
     }
-	
-    
 
+    
+    @PostMapping("/logout")
+    public RedirectView logout (HttpServletRequest request, HttpSession session) {
+    	
+    		
+    	// Invalida la sesión actual
+    	if(session != null) {
+    			session.invalidate();
+    		}
+    		
+    		
+    	//// Borra la autenticación actual 
+    	SecurityContextHolder.clearContext();
+    		
+    		
+    		return new RedirectView("");
+    	}
+    
 
     
    

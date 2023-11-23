@@ -30,31 +30,17 @@ public class BeansSecurityConfig {
 		http.authorizeHttpRequests(httpCustom -> 
 		
 		httpCustom
-		.requestMatchers("/cs/**","/images/**","/js/**").permitAll()
+		.requestMatchers("/css/**","/images/**","/js/**").permitAll()
 		.requestMatchers("/tecnopracticas/cuentas/login").permitAll()
+		.requestMatchers("/tecnopracticas").permitAll()
 		.requestMatchers("/tecnopracticas/").hasAnyAuthority("ESTUDIANTE","ADMINISTRADOR")
 		.requestMatchers("/tecnopracticas/").hasAuthority("")
 		.requestMatchers("/tecnopracticas/").hasAuthority("")
 		.requestMatchers("/tecnopracticas/").hasAuthority("")
 		.anyRequest().authenticated())
 		
-		.formLogin(login ->login.loginPage("/tecnopracticas/cuentas/login").permitAll());
+		.formLogin(Customizer.withDefaults());
 		return http.build();
-	}
-	
-	@Bean 
-	AuthenticationManager authenticationManager(UserDetailsService detailsService, PasswordEncoder encoder) { 
-		
-		DaoAuthenticationProvider daoAuthenticationProvider=
-				new DaoAuthenticationProvider();
-		daoAuthenticationProvider.setUserDetailsService(detailsService);
-		daoAuthenticationProvider.setPasswordEncoder(encoder);
-		
-		ProviderManager manager = new ProviderManager(daoAuthenticationProvider);
-		
-		
-		return manager;
-		
 	}
 	
 	

@@ -22,8 +22,8 @@ public class Empresa {
     @Column(name = "nombre_completo")
     private String nombre;
     
-    @Column(name = "NIT")
-    private Long nit;
+    @Column(name = "nit")
+    private String nit;
     
     @Column(name = "telefono")
     private String telefono;

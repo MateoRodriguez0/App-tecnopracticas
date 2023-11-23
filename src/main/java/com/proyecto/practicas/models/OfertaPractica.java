@@ -46,4 +46,9 @@ public class OfertaPractica {
    
     @Column(name = "fecha_publicacion")
     private Timestamp fecha;
+
+    @Column(name = "detalles")
+    private String detalles;
+
+
 }

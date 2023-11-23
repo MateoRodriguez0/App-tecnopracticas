@@ -15,7 +15,7 @@ public class PerfilController {
 	
 	@GetMapping(value = "/myaccount")
 	public String getVerPerfilUser() {
-		return urlPerfilestudiante;
+		return urlPerfilAdmin;
 	}
 		
 }

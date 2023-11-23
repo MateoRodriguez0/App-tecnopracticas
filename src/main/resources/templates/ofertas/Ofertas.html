@@ -87,9 +87,7 @@
 
                       <td style="text-align: center;" th:text="${oferta.empresa.nombre}"></td>
 
-                      <td >
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis possimus eos quam sint quo cupiditate velit similique et quasi molestias amet nisi perspiciatis eligendi laudantium distinctio, incidunt dolor numquam, quia praesentium ex molestiae. Aspernatur vero illo ex consequuntur, praesentium nobis dolorem sit voluptate fugit voluptas aliquid sunt ipsum. Hic rerum, optio facere mollitia harum praesentium blanditiis officia fugiat ducimus consectetur non odio inventore aspernatur esse dolorum molestiae explicabo repellendus? Dicta saepe autem totam quibusdam nostrum recusandae facilis nisi praesentium eius, voluptatibus porro accusantium, hic et soluta eveniet ex modi magni fugit nemo rerum suscipit. Eius nam eos quasi fugiat velit?
-                      </td>
+                      <td th:text="${oferta.descripcion}"> </td>
 
                       <td>
                             <button type="button" class="mt-5 mx-5 btn btn-primary" data-bs-toggle="modal" data-bs-target="#mimodal">Mas informacion</button>
@@ -98,12 +96,12 @@
                                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="modaltitle">Programador Junior</h5>
+                                            <h5 class="modal-title" id="modaltitle" th:text="${oferta.nombre}"></h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                                         </div>
 
                                         <div class="modal-body" >
-                                            <p th:utext="${oferta.descripcion}"></p>
+                                            <p th:utext="${oferta.detalles}"></p>
                                         </div>
 
                                         <div class="modal-footer">

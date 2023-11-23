@@ -26,6 +26,8 @@ public class OfertaPractica {
     @Column(name = "nombre_oferta")
     private String nombre;
     
+
+    
     @NotEmpty(message = "El descripcion no puede estar vacio")
     @Column(name = "descripcion")
     private String descripcion;

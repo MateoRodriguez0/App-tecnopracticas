@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,9 +25,21 @@ public class BeansSecurityConfig {
 	
 	
 	@Bean
-	SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		
-		return httpSecurity.build();
+		http.authorizeHttpRequests(httpCustom -> 
+		
+		httpCustom
+		.requestMatchers("/cs/**","/images/**","/js/**").permitAll()
+		.requestMatchers("/tecnopracticas/cuentas/login").permitAll()
+		.requestMatchers("/tecnopracticas/").hasAnyAuthority("ESTUDIANTE","ADMINISTRADOR")
+		.requestMatchers("/tecnopracticas/").hasAuthority("")
+		.requestMatchers("/tecnopracticas/").hasAuthority("")
+		.requestMatchers("/tecnopracticas/").hasAuthority("")
+		.anyRequest().authenticated())
+		
+		.formLogin(login ->login.loginPage("/tecnopracticas/cuentas/login").permitAll());
+		return http.build();
 	}
 	
 	@Bean 
@@ -39,7 +52,6 @@ public class BeansSecurityConfig {
 		
 		ProviderManager manager = new ProviderManager(daoAuthenticationProvider);
 		
-		manager.setEraseCredentialsAfterAuthentication(false);
 		
 		return manager;
 		

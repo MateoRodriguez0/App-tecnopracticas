@@ -4,6 +4,7 @@ import com.proyecto.practicas.models.Usuario;
 import com.proyecto.practicas.repositories.UserRepository;
 import com.proyecto.practicas.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,27 +46,37 @@ public class UserServiceImpl implements UserService {
 	
 	
 	
-	  @Autowired
-	    private UserRepository userRepository;
-
-
+	
 
 	@Override
 	public void registrarUsuario(Usuario usuario) {
 		
 		usuario.setEnable(false);
-		//usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+		usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
 		userRepository.save(usuario);
 	}
 
+	@Override
+	public void activarCuenta(String email) {
+		
+		Usuario usuario = getUsuarioByEmail(email);
+		usuario.setEnable(true);
+		
+		userRepository.save(usuario);
+	}
+	   	
 	@Override
 	public String getnameByEmail(String email) {
 		
 		return getUsuarioByEmail(email).getNombre();
 	}
 
-/*@Autowired
- private PasswordEncoder passwordEncoder;
-	   	*/
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
+	@Autowired
+	private UserRepository userRepository;
+
+
 
 }

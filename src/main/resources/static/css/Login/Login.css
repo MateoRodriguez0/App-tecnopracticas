@@ -63,6 +63,9 @@ input{
 .btn1:hover{
     background-color: #12a8d6
 }
+.noregistrado{
+    margin-left: 30px;
+}
 
 /*si la resolución baja a 991px realiza estos cambios*/
 

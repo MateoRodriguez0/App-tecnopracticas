@@ -21,5 +21,5 @@ public interface VerificacionEmailClient {
 	
 	
 	@GetMapping(value = "/account-created")
-	public ResponseEntity<?> accountCreated(@RequestParam(name = "email")String email);
+	public ResponseEntity<Boolean> accountCreated(@RequestParam(name = "email")String email);
 }

@@ -21,4 +21,6 @@ public interface UserService {
     void registrarUsuario(Usuario usuario);
 
     String getnameByEmail(String email);
+    
+    void activarCuenta(String email);
 }

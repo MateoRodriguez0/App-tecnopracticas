@@ -9,7 +9,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh; 
+    height: 150%; 
     background-image: url(/images/Register/LogoComfe.ico);
     background-repeat: no-repeat;
     background-position: center center;

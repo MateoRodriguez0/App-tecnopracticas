@@ -65,7 +65,7 @@ public class Usuario {
     
     
     @Column(name = "enable")
-    private boolean enable;
+    private Boolean enable;
     
     @OneToOne
     @JoinColumn(name = "IdRol")
@@ -79,7 +79,7 @@ public class Usuario {
     private List<OfertaPractica> ofertaPracticas;
     */
     
-    
+  
     
     /**
 	 * verifica si la contraseña y la verificacion de contraseña son iguales.

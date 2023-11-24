@@ -20,15 +20,23 @@
 <body>
 	<nav class="navbar navbar-expand-lg bg-body-tertiary">
 		<div class="container-fluid">
-			<a th:href="@{/tecnopracticas/programas}"><img th:src="@{/images/LogoTC.png}" alt="" width="145px"
-					height=""></a>
+			<a th:href="@{/tecnopracticas/programas}"><img th:src="@{/images/LogoTC.png}" alt="" width="145px" height=""></a>
+					
+			<div class="form-file2">
+				<div class="form-file__action2">
+				</div>
+
+				<a th:href="@{/tecnopracticas/logout}">Cerrar sesion</a>
+			</div>
+									
+
+					
+
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
 				aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse" id="navbarText">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
-			</div>
+
 		</div>
 	</nav>
 
@@ -96,7 +104,7 @@
 				<h1>Gestion de las ofertas</h1>
 				</p>
 				<br>
-				<a th:href="@{/tecnopracticas/programas}"><button>Ver</button></a> 
+				<a th:href="@{/tecnopracticas/ofertas/nueva}"> <button type="button" class="btn btn-primary">Crear oferta</button></a>
 			</div>
 		</div>
 	</div>

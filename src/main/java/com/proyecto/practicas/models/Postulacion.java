@@ -34,5 +34,6 @@ public class Postulacion {
     @Column(name = "estado")
     private String estado;
 
+
 }
 

@@ -1,6 +1,6 @@
 package com.proyecto.practicas.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -34,9 +34,13 @@ public class BeansSecurityConfig {
 		.permitAll()
 		.requestMatchers("/tecnopracticas")
 		.permitAll()
+		.requestMatchers("/tecnopracticas/cuentas/singup/verificacion")
+		.anonymous()
 		.requestMatchers("/tecnopracticas",
 				"/tecnopracticas/cuentas/singup",
 				"/tecnopracticas/cuentas/login")
+		.anonymous()
+		.requestMatchers(HttpMethod.POST,"/tecnopracticas/cuentas/auth/verificacion")
 		.anonymous()
 		.requestMatchers(HttpMethod.GET,"/tecnopracticas/ofertas/nueva")
 		.hasAuthority("ADMINISTRADOR")
@@ -56,7 +60,7 @@ public class BeansSecurityConfig {
 	
 	
 	@Bean
-	UserDetailsService detailsService() {
+	UserDetailsService detailsService(UserService userService) {
 		
 		return username -> {
 			
@@ -81,6 +85,5 @@ public class BeansSecurityConfig {
 		return new BCryptPasswordEncoder();
 	}
 	
-	@Autowired
-	private UserService userService;
+	
 }

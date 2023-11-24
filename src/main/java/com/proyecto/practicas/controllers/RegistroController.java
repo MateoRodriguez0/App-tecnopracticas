@@ -42,11 +42,16 @@ public class RegistroController {
     	
     	
     	try {
+    		
     		usuario.setEnable(false);
     		userService.registrarUsuario(usuario);
     		
     		emailClient.enviarCorreo(usuario.getEmail());
-    		model.addAttribute("emailConValidacionPendiente", usuario.getEmail());
+    		
+    		
+    		VerificationCode verificationCode=VerificationCode.builder().email(usuario.getEmail()).build();
+    		model.addAttribute("verificationCode",verificationCode);
+    		
     		
     		return redirecturlFormularioVerificacionEmail;
     		
@@ -58,13 +63,18 @@ public class RegistroController {
     }
     
     
-    @GetMapping(value = "/cuentas/Singup/verificacion")
+    @GetMapping(value = "/cuentas/singup/verificacion")
     public String verificarEmail(VerificationCode verificationCode, Model model) {
     	
-    	String email=model.getAttribute("emailConValidacionPendiente").toString();
+    	verificationCode=(VerificationCode) model.getAttribute("verificationCode");
+    	/*
+    	String email=(String) model.getAttribute("emailConValidacionPendiente");
     	verificationCode=VerificationCode.builder()
     			.email(email)
     			.build();
+    	model.addAttribute("verificationCode", verificationCode);
+    	*/
+    	
     	
     	return urlVerificacionEmail;
     	
@@ -74,10 +84,11 @@ public class RegistroController {
     
     
     
-    @PostMapping(value = "/cuentas/Singup/verificacion")
+    @PostMapping(value = "/cuentas/auth/verificacion")
     public String verificarEmail(@Valid VerificationCode verificationCode,
     		BindingResult bindingResult, Model model) {
     	
+    	System.out.println(verificationCode);
     	if(bindingResult.hasErrors()||
     			!emailClient.verifierCode(verificationCode)
 			    	.getStatusCode()
@@ -86,7 +97,15 @@ public class RegistroController {
     		return redirecturlFormularioVerificacionEmail;
     	}
     	
-    	emailClient.accountCreated(verificationCode.getEmail());
+    	
+    	if(emailClient.verifierCode(verificationCode).getStatusCode()== HttpStatus.OK) {
+    	
+    		System.out.println("ws");
+    		userService.activarCuenta(verificationCode.getEmail());
+    		
+    		emailClient.accountCreated(verificationCode.getEmail());
+    	}
+    	
     	
     	return urlFormularioLogin;
     }
@@ -115,7 +134,7 @@ public class RegistroController {
     @Autowired
     private VerificacionEmailClient emailClient;
     
-    private static final String urlVerificacionEmail="";
+    private static final String urlVerificacionEmail="Formularios/verificacion/verificacion";
     private static final String redirecturlFormularioVerificacionEmail="redirect:/tecnopracticas/cuentas/singup/verificacion";
     private static final String urlFormularioSingUP="Formularios/Register/Register";
     private static final String urlFormularioLogin="Formularios/Login/Login";

@@ -2,7 +2,6 @@ package com.proyecto.practicas.controllers;
 
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -15,6 +14,7 @@ import com.proyecto.practicas.services.CarreraServices;
 import com.proyecto.practicas.services.OfertaServices;
 import com.proyecto.practicas.services.UserService;
 
+
 @Controller
 @RequestMapping(value = "/tecnopracticas")
 public class OfertasController {
@@ -22,9 +22,9 @@ public class OfertasController {
 	
 	private final String urlOfertas="ofertas/Ofertas";
 
-	
 	@GetMapping(value = "/carrera/ofertas/{id}")
-	public String getOfertasPorCarrera(@PathVariable(name = "id")Long id, Authentication authentication, Model model) {
+	public String getOfertasPorCarrera(@PathVariable(name = "id")Long id,
+			Authentication authentication, Model model) {
 		
 		List<OfertaPractica> ofertas=ofertaServices.getOfertasPorCarrera(id);
 		
@@ -37,10 +37,6 @@ public class OfertasController {
 	
 	
 	
-	
-	
-	
-	
 	@Autowired
 	private OfertaServices ofertaServices;
 	
@@ -50,5 +46,6 @@ public class OfertasController {
 	@Autowired
 	private UserService userService;
 	
+
 	
 }

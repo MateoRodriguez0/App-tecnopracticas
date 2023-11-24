@@ -75,7 +75,7 @@
 
 	<div class="container">
 		<div class="row">
-			<div   class="col-sm-12 col-md- col-lg-9 col-xl-9">
+			<div class="col-sm-12 col-md- col-lg-9 col-xl-9">
 
 
 				<table th:each="oferta: ${ofertas}" class="table table-sm">
@@ -119,9 +119,12 @@
 										<div class="modal-footer">
 											<button type="button" class="btn btn-secondary"
 												data-bs-dismiss="modal">Cerrar</button>
-											<a
+											<a sec:Authorize="hasAnyAuthority('ESTUDIANTE')"
 												th:href="@{/tecnopracticas/estudiante/oferta/{id}/postulacion/nueva (id= ${oferta.id})}"><button
 													type="button" class="btn btn-primary">Postularse</button></a>
+											<a sec:Authorize="hasAnyAuthority('ADMINISTRADOR')"
+												th:href="@{/tecnopracticas/ofertas/actualizar/{id} (id= ${oferta.id})}"><button
+													type="button" class="btn btn-primary">Actualizar</button></a>
 										</div>
 									</div>
 								</div>

@@ -3,6 +3,7 @@ package com.proyecto.practicas.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -31,10 +32,16 @@ public class BeansSecurityConfig {
 		.permitAll()
 		.requestMatchers("/tecnopracticas/cuentas/login")
 		.permitAll()
-		.requestMatchers("/tecnopracticas","/tecnopracticas/cuentas/singup","/tecnopracticas/cuentas/login")
+		.requestMatchers("/tecnopracticas")
+		.permitAll()
+		.requestMatchers("/tecnopracticas",
+				"/tecnopracticas/cuentas/singup",
+				"/tecnopracticas/cuentas/login")
 		.anonymous()
-		.requestMatchers("/tecnopracticas/")
-		.hasAnyAuthority("ESTUDIANTE","ADMINISTRADOR")
+		.requestMatchers(HttpMethod.GET,"/tecnopracticas/ofertas/nueva")
+		.hasAuthority("ADMINISTRADOR")
+		.requestMatchers(HttpMethod.POST,"/tecnopracticas/ofertas/nueva")
+		.hasAuthority("ADMINISTRADOR")
 		.requestMatchers("/tecnopracticas/carrera/ofertas/**")
 		.hasAnyAuthority("ESTUDIANTE","ADMINISTRADOR")
 		.requestMatchers("/tecnopracticas/myaccount")

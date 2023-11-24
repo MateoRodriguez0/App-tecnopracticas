@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+	<!--Importe de Datepicker y jquery-->
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+		crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+	<!--Importe de estilos-->
+	<link rel="shortcut icon" href="LogoTC.png" />
+	<link rel="stylesheet" href="Styles.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300&display=swap" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/styles-vistas(admin,perfil,ofertas)/Styles.css}">
+	<!--Importe de TinyMce-->
+	<script src="https://cdn.tiny.cloud/1/es7xhsky2i7mp42mn8rkooj34ytmohdwipc1udejfx8byhfe/tinymce/6/tinymce.min.js"
+		referrerpolicy="origin"></script>
+	<script>
+		tinymce.init({
+			selector: 'textarea'
+		});
+	</script>
+	<title>Formulario de ofertas</title>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg bg-body-tertiary">
+		<div class="container-fluid">
+			<a th:href="@{/tecnopracticas/programas}"><img th:src="@{/images/LogoTC.png}" alt="" width="145px"
+					height=""></a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+				aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarText">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+				<h5>
+					<p id="Nperfil" th:text="${username}"></p>
+				</h5>&nbsp;&nbsp;&nbsp;
+			</div>
+
+			<div class="form-file2">
+				<div class="form-file__action2">
+				</div>
+
+				<div class="form-file__result2" id="result-image2">
+					<img id="img-result2" alt="" />
+				</div>
+
+				<a th:href="@{/tecnopracticas/myaccount}">Ver perfil</a>
+			</div>
+		</div>
+	</nav>
+	<br><br>
+	<div class="container text-center">
+		<div class="row">
+
+
+
+			<div class="col-sm-12 col-md- col-lg-6 col-xl-6">
+				<br><br><br><br>
+				<h2>Formulario de orfertas</h2>
+				<br>¡Bienvenido/a a nuestro sección de publicación de ofertas de prácticas laborales!
+				En nuestra plataforma, nos enfocamos en conectar a estudiantes universitarios talentosos con
+				oportunidades de prácticas laborales en diversas empresas.
+				Si haces parte una empresa interesada en ofrecer una experiencia valiosa y enriquecedora a estudiantes,
+				¡estás en el lugar indicado!
+				Este formulario te permitirá publicar y promocionar tus ofertas de prácticas laborales de manera
+				sencilla y eficiente.
+			</div>
+
+
+			<div class="col-sm-12 col-md- col-lg-6 col-xl-6">
+				<div class="card">
+					<div class="card-body">
+						<form th:action="@{/tecnopracticas/ofertas/nueva/save}" th:object="${oferta}" method="post">
+							<div class="mb-3">
+								<div class="form-text" id="basic-addon4">Recuerda llenar todos los campos del registro
+								</div>
+								<br>
+
+							</div>
+
+							<div class="input-group">
+								<span class="input-group-text" id="id">Titulo</span>
+								<input type="text" class="form-control" id="nombre_oferta"
+									aria-describedby="basic-addon3 basic-addon4" th:field="*{nombre}">
+							</div>
+							<br>
+							<div class="input-group mb-3">
+								<select class="form-select" id="carreras" required th:field="*{carrera.id}">
+									<option selected disabled value="">Carrera</option>
+									<option th:each="carrera: ${carreras}" th:text="${carrera.nombre}"
+										th:value="${carrera.id}"></option>
+								</select>
+
+								<select class="form-select" id="empresas" required th:field="*{empresa.id}">
+									<option selected disabled value="">Empresa</option>
+									<option th:each="empresa: ${empresas}" th:text="${empresa.nombre}"
+										th:value="${empresa.id}"></option>
+								</select>
+							</div>
+							
+
+							<div class="input-group">
+								<span class="input-group-text" id="descripcion">Descripcion</span>
+								<input type="text" class="form-control" id="descripcion"
+									aria-describedby="basic-addon3 basic-addon4" th:field="*{descripcion}">
+							</div>
+							<br>
+							<div class="input-group">
+								<span class="input-group-text">Detalles</span>
+							</div>
+							<textarea class="form-control" aria-label="With textarea" id="detalles"
+								th:field="*{detalles}"></textarea>
+
+							<br>
+
+							<div class="row form-group">
+								<div class="input-group date" id="datepicker">
+									<input type="text" class="form-control">
+									<span class="input-group-append">
+										<span class="input-group-text bg-white d-block">
+											<i class="fa fa-calendar"></i>
+										</span>
+									</span>
+								</div>
+							</div>
+							<br>
+
+							<button type="submit" class="btn btn-primary">Publicar</button>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="calendario.js"></script>
+
+</body>
+
+</html>

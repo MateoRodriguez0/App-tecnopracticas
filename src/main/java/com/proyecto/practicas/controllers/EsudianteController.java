@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
 import com.proyecto.practicas.models.Postulacion;
@@ -47,7 +46,7 @@ public class EsudianteController {
 	
 	
 	
-	@PostMapping(value = "/postulaciones/eliminar/{id}")
+	@GetMapping(value = "/postulaciones/eliminar/{id}")
 	public String eliminarPostulacion(@PathVariable(name = "id")Long id){
 		
 		estudianteServices.eliminarPostulacion(id);
@@ -57,7 +56,7 @@ public class EsudianteController {
 	
 	
 	
-	private final String urlPostulaciones="";
+	private final String urlPostulaciones="redirect:/tecnopracticas/myaccount";
 	
 	private final String urlRedirectpostulaciones="redirect:/tecnopracticas/estudiante/postulaciones";
 	

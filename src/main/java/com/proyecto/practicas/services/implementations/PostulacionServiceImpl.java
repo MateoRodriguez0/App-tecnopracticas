@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.proyecto.practicas.models.Postulacion;
 import com.proyecto.practicas.repositories.PostulacionRepository;
-import com.proyecto.practicas.services.EstudianteServices;
 import com.proyecto.practicas.services.PostulacionServices;
 import com.proyecto.practicas.services.UserService;
 
@@ -36,8 +35,7 @@ public class PostulacionServiceImpl implements PostulacionServices {
 	}
 	
 	
-	@Autowired
-	private EstudianteServices estudianteServices;
+
 	
 	@Autowired
 	private UserService userService;

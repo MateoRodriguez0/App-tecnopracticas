@@ -3,6 +3,7 @@ package com.proyecto.practicas.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name ="ofertas_practicas")
+@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -33,10 +35,10 @@ public class OfertaPractica {
     private String descripcion;
 
     
-    /* @ManyToOne()
-    @JoinColumn(name = "")
+    @ManyToOne()
+    @JoinColumn(name = "idAdministrador")
     private Usuario adimn;
-*/
+    
     @ManyToOne
     @JoinColumn(name = "IdEmpresa")
     private Empresa empresa;

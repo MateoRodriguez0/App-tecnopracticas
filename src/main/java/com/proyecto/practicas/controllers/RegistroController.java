@@ -26,12 +26,6 @@ public class RegistroController {
     @GetMapping(value = "/cuentas/singup")
     public String getFormSingUp(Usuario usuario){
 
-    	usuario.setEmail("ssdsd");
-    	usuario.setNombre("ds");
-    	usuario.setTelefono("dsds");
-    	usuario.setPassword("sdsd");
-    	usuario.setPasswordValid("dsddsds");
-    	
         return urlFormularioSingUP;
     }
 
@@ -42,8 +36,6 @@ public class RegistroController {
     	if(bindingResult.hasErrors() || !usuario.validPasword() ||
     			userService.ExistUserByEmail(usuario.getEmail())|| !usuario.esMayordeEdad()) {
     		
-    		
-    		System.out.println(bindingResult.getErrorCount());
     		return urlFormularioSingUP;
     	}
    

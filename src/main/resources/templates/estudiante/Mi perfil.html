@@ -95,6 +95,7 @@
           <th scope="col">Programa</th>
           <th scope="col">Empresa</th>
           <th scope="col">Estado</th>
+          <th scope="col">Operaciones</th>
 
         </tr>
       </thead>
@@ -107,6 +108,8 @@
           <td th:text="${postulacion.oferta.carrera.nombre}"></td>
           <td th:text="${postulacion.oferta.empresa.nombre}"></td>
           <td th:text="${postulacion.estado}">Visto</td>
+           <td > <a th:href="@{/tecnopracticas/estudiante/postulaciones/eliminar/{id} (id=${postulacion.id})}"> <button type="button" class="btn btn-outline-danger">Eliminar postulacion</button></a></td>
+         
         </tr>
         
       

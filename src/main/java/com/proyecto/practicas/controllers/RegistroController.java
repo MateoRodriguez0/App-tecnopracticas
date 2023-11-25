@@ -1,7 +1,6 @@
 package com.proyecto.practicas.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,7 +30,8 @@ public class RegistroController {
 
     
     @PostMapping(value = "/cuentas/singup")
-    public String crearCuenta(@Valid Usuario usuario,BindingResult bindingResult,Model model) {
+    public String crearCuenta(@Valid Usuario usuario,BindingResult bindingResult,
+    		Model model,VerificationCode verificationCode) {
 		
     	if(bindingResult.hasErrors() || !usuario.validPasword() ||
     			userService.ExistUserByEmail(usuario.getEmail())|| !usuario.esMayordeEdad()) {
@@ -49,11 +49,10 @@ public class RegistroController {
     		emailClient.enviarCorreo(usuario.getEmail());
     		
     		
-    		VerificationCode verificationCode=VerificationCode.builder().email(usuario.getEmail()).build();
+    		verificationCode=VerificationCode.builder().email(usuario.getEmail()).build();
     		model.addAttribute("verificationCode",verificationCode);
     		
-    		
-    		return redirecturlFormularioVerificacionEmail;
+    		return urlVerificacionEmail;
     		
     	}catch (FeignException e) {
     		return urlFormularioSingUP;
@@ -63,24 +62,7 @@ public class RegistroController {
     }
     
     
-    @GetMapping(value = "/cuentas/singup/verificacion")
-    public String verificarEmail(VerificationCode verificationCode, Model model) {
-    	
-    	verificationCode=(VerificationCode) model.getAttribute("verificationCode");
-    	/*
-    	String email=(String) model.getAttribute("emailConValidacionPendiente");
-    	verificationCode=VerificationCode.builder()
-    			.email(email)
-    			.build();
-    	model.addAttribute("verificationCode", verificationCode);
-    	*/
-    	
-    	
-    	return urlVerificacionEmail;
-    	
-    	
-    	
-    }
+   
     
     
     
@@ -88,26 +70,30 @@ public class RegistroController {
     public String verificarEmail(@Valid VerificationCode verificationCode,
     		BindingResult bindingResult, Model model) {
     	
-    	System.out.println(verificationCode);
-    	if(bindingResult.hasErrors()||
-    			!emailClient.verifierCode(verificationCode)
-			    	.getStatusCode()
-			    	.equals(HttpStatus.OK)) {
+  
+    	try {
+    		if(!emailClient.verifierCode(verificationCode).getBody()) {
+        	
+        		return urlVerificacionEmail;
+        	}
+    		else {
+    			userService.activarCuenta(verificationCode.getEmail());
+     
+        		emailClient.accountCreated(verificationCode.getEmail());
+       
+        		return urlFormularioLogin;
+    		}
     		
-    		return redirecturlFormularioVerificacionEmail;
-    	}
-    	
-    	
-    	if(emailClient.verifierCode(verificationCode).getStatusCode()== HttpStatus.OK) {
-    	
-    		System.out.println("ws");
-    		userService.activarCuenta(verificationCode.getEmail());
     		
-    		emailClient.accountCreated(verificationCode.getEmail());
-    	}
+    	}catch (Exception e) {
+    		userService.deleteUser(userService.getUsuarioByEmail(verificationCode.getEmail()).getId());
+    		
+    		return urlVerificacionEmail;
+		}
+    
     	
     	
-    	return urlFormularioLogin;
+    	
     }
     
     
@@ -135,7 +121,6 @@ public class RegistroController {
     private VerificacionEmailClient emailClient;
     
     private static final String urlVerificacionEmail="Formularios/verificacion/verificacion";
-    private static final String redirecturlFormularioVerificacionEmail="redirect:/tecnopracticas/cuentas/singup/verificacion";
     private static final String urlFormularioSingUP="Formularios/Register/Register";
     private static final String urlFormularioLogin="Formularios/Login/Login";
 }

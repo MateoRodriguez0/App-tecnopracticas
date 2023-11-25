@@ -16,10 +16,10 @@ public interface VerificacionEmailClient {
 	@PostMapping("/mail/enviar")
 	public  ResponseEntity<?>  enviarCorreo(@RequestParam("email") String email);
 	
-	@PostMapping(value ="/verifier")
-	public ResponseEntity<?> verifierCode(@RequestBody VerificationCode verificationCode);
+	@PostMapping(value ="/mail/verifier")
+	public ResponseEntity<Boolean> verifierCode(@RequestBody VerificationCode verificationCode);
 	
 	
-	@GetMapping(value = "/account-created")
+	@GetMapping(value = "/mail/account-created")
 	public ResponseEntity<Boolean> accountCreated(@RequestParam(name = "email")String email);
 }

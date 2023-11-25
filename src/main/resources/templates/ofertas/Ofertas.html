@@ -1,136 +1,105 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-      crossorigin="anonymous"
-    ></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Mulish:wght@300&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="shortcut icon"
-      th:href="@{/images/header(perfil-admin-ofertas)/LogoTC.png}"
-    />
-    <link
-      rel="stylesheet"
-      th:href="@{/css/styles-vistas(admin,perfil,ofertas)/Styles.css}"
-    />
-    <title>Ofertas</title>
-  </head>
 
-  <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <a th:href="@{/tecnopracticas/programas}"
-          ><img th:src="@{/images/LogoTC.png}" alt="" width="145px" height=""
-        /></a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarText"
-          aria-controls="navbarText"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarText">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
-          <h5>
-            <p id="Nperfil" th:text="${username}"></p>
-          </h5>
-          &nbsp;&nbsp;&nbsp;
-        </div>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+		crossorigin="anonymous"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300&display=swap" rel="stylesheet" />
+	<link rel="shortcut icon" th:href="@{/images/header(perfil-admin-ofertas)/LogoTC.png}" />
+	<link rel="stylesheet" th:href="@{/css/styles-vistas(admin,perfil,ofertas)/Styles.css}" />
+	<title>Ofertas</title>
+</head>
 
-        <div class="form-file2">
-          <div class="form-file__action2"></div>
+<body>
+	<nav class="navbar navbar-expand-lg bg-body-tertiary">
+		<div class="container-fluid">
+			<a th:href="@{/tecnopracticas/programas}"><img th:src="@{/images/LogoTC.png}" alt="" width="145px"
+					height="" /></a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+				aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarText">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+				<h5>
+					<p id="Nperfil" th:text="${username}"></p>
+				</h5>
+				&nbsp;&nbsp;&nbsp;
+			</div>
 
-          <div class="form-file__result2" id="result-image2">
-            <img id="img-result2" alt="" />
-          </div>
+			<div class="form-file2">
+				<div class="form-file__action2"></div>
 
-          <a th:href="@{/tecnopracticas/myaccount}">Ver perfil</a>
-        </div>
-      </div>
-    </nav>
-    <br />
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12 col-md- col-lg-6 col-xl-6">
-          <br /><br /><br /><br />
-          <h2 th:text="'Practicas de '+ ${carrera.nombre}"></h2>
-        </div>
+				<div class="form-file__result2" id="result-image2">
+					<img id="img-result2" alt="" />
+				</div>
 
-        <div class="col-sm-12 col-md- col-lg-6 col-xl-6">
-          <img
-            th:src="${carrera.urlImagen}"
-            alt=""
-            srcset=""
-            width="100%"
-            height="300px"
-          />
-        </div>
-      </div>
-    </div>
-    <br />
+				<a th:href="@{/tecnopracticas/myaccount}">Ver perfil</a>
+			</div>
+		</div>
+	</nav>
+	<br />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 col-md- col-lg-6 col-xl-6">
+				<br /><br /><br /><br />
+				<h2 th:text="'Practicas de '+ ${carrera.nombre}"></h2>
+			</div>
 
-    <div
-      class="card"
-      style="align-self: center; background-color: rgb(249, 247, 247)"
-    >
-      <div class="card-body">
-        <h2>
-          <p style="text-align: center">Ofertas disponibles</p>
-        </h2>
-      </div>
-    </div>
-    <br />
+			<div class="col-sm-12 col-md- col-lg-6 col-xl-6">
+				<img th:src="${carrera.urlImagen}" alt="" srcset="" width="100%" height="300px" />
+			</div>
+		</div>
+	</div>
+	<br />
 
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12 col-md- col-lg-9 col-xl-9">
-          <table th:each="oferta: ${ofertas}" class="table table-sm">
-            <caption></caption>
-            <thead>
-              <th style="text-align: center">ID</th>
+	<div class="card" style="align-self: center; background-color: rgb(249, 247, 247)">
+		<div class="card-body">
+			<h2>
+				<p style="text-align: center">Ofertas disponibles</p>
+			</h2>
+		</div>
+	</div>
+	<br />
 
-              <th style="text-align: center">Empresa</th>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 col-md- col-lg-9 col-xl-9">
+				<table th:each="oferta: ${ofertas}" class="table table-sm">
+					<caption></caption>
+					<thead>
+						<th style="text-align: center">ID</th>
 
-              <th style="text-align: center" th:text="${oferta.nombre}"></th>
-            </thead>
-            <tbody>
-              <td style="text-align: center" th:text="${oferta.id}"></td>
+						<th style="text-align: center">Empresa</th>
 
-              <td
-                style="text-align: center"
-                th:text="${oferta.empresa.nombre}"
-              ></td>
+						<th style="text-align: center" th:text="${oferta.nombre}"></th>
 
-              <td th:text="${oferta.descripcion}"></td>
+					</thead>
+					<tbody>
+						<td style="text-align: center" th:text="${oferta.id}"></td>
 
-              <td>
-                <!-- Modal -->
-								<button type="button" class="mt-5 mx-5 btn btn-primary" data-bs-toggle="modal"
+						<td style="text-align: center" th:text="${oferta.empresa.nombre}"></td>
+
+
+						<td th:text="${oferta.descripcion}"></td>
+
+						<td>
+							<!-- Modal -->
+							<button type="button" class="mt-5 mx-5 btn btn-primary" data-bs-toggle="modal"
 								th:data-bs-target="'#mimod-'+${oferta.id}">Mas informacion</button>
 
 							<div class="modal fade" th:id="'mimod-'+${oferta.id}" tabindex="-1" aria-hidden="true"
 								aria-labelledby="modaltitle">
 								<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 									<div class="modal-content">
+
 										<div class="modal-header">
 											<h5 class="modal-title" id="modaltitle" th:text="${oferta.nombre}"></h5>
 											<button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -142,38 +111,43 @@
 										</div>
 
 										<div class="modal-footer">
+
 											<button type="button" class="btn btn-secondary"
 												data-bs-dismiss="modal">Cerrar</button>
+											<a sec:Authorize="hasAnyAuthority('ADMINISTRADOR')"
+												th:href="@{/tecnopracticas/e/ofertas/eliminar/{id}(id= ${oferta.id})}">
+												<button type="button" class="btn btn-danger">Eliminar</button></a>
 											<a sec:Authorize="hasAnyAuthority('ESTUDIANTE')"
 												th:href="@{/tecnopracticas/estudiante/oferta/{id}/postulacion/nueva (id= ${oferta.id})}"><button
 													type="button" class="btn btn-primary">Postularse</button></a>
 											<a sec:Authorize="hasAnyAuthority('ADMINISTRADOR')"
 												th:href="@{/tecnopracticas/ofertas/actualizar/{id} (id= ${oferta.id})}"><button
 													type="button" class="btn btn-primary">Actualizar</button></a>
-													
+
 										</div>
 									</div>
 								</div>
 							</div>
-              </td>
-            </tbody>
-          </table>
-        </div>
+						</td>
+					</tbody>
+				</table>
+			</div>
 
-        <div class="col-sm-12 col-md- col-lg-3 col-xl-3 text-center">
-          <div class="card text-bg-light mb-3" style="max-width: 18rem">
-            <div class="card-body">
-              <h5 class="card-title">Recuerda que..</h5>
-              <p class="card-text">
-                Debes estar en 5to o 6to semestre y con un promedio superior que
-                3.5 para poder realizar las practicas correspondientes
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+			<div class="col-sm-12 col-md- col-lg-3 col-xl-3 text-center">
+				<div class="card text-bg-light mb-3" style="max-width: 18rem">
+					<div class="card-body">
+						<h5 class="card-title">Recuerda que..</h5>
+						<p class="card-text">
+							Debes estar en 5to o 6to semestre y con un promedio superior que
+							3.5 para poder realizar las practicas correspondientes
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <script th:src="@{/js/ImageF.js}"></script>
-  </body>
+	<script th:src="@{/js/ImageF.js}"></script>
+</body>
+
 </html>

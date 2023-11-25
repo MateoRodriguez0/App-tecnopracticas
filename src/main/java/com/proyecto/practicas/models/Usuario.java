@@ -57,8 +57,8 @@ public class Usuario {
     @Column(name = "password")
     private String password;
 
+    @Transient
     @Password(message = "El campo verificación de cintraseña no es valido")
-	@Transient
 	@NotBlank(message = "El campo  verificación de contraseña no puede estar en blanco")
 	@NotEmpty(message = "El campo verificación de contraseña no puede estar vacio")
 	private String passwordValid;

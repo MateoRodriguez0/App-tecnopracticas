@@ -23,4 +23,7 @@ public interface UserService {
     String getnameByEmail(String email);
     
     void activarCuenta(String email);
+    
+    
+    
 }

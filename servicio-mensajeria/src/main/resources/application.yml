@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tecnopracticas?useSSL=false&serverTimezone=America/Bogota
+    username: usertecnopracticas
+    password: tecnopracticas
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    open-in-view: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: practicastecnologicocomfenalco@gmail.com
+    password: qzeeegjimzbiscyj
+    properties:
+      mail:
+       smtp:
+        auth: true
+        starttls:
+          enable: true
+          
+  jackson:
+    time-zone: America/Bogota
+  
+server:
+  port: 10455 
+
+tecnopracticas:
+  urls:
+   verificacion: http://localhost:10455/verifier-account
+   logo: https://tecnopracticas.s3.us-east-1.amazonaws.com/LOGO_NUEVO.png

@@ -1,7 +1,6 @@
 package com.api.email.controller;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -42,8 +41,8 @@ public class MensajeriaController {
 	
 	
 	@GetMapping(value ="/verifier-account")
-	public ResponseEntity<?> verifierCode(@RequestParam String token,@RequestParam UUID user ) {
-		if(accountService.validarCuenta(user, token)) {
+	public ResponseEntity<?> verifierCode(String email) {
+		if(accountService.CuentaAprobada(email)) {
 			return ResponseEntity.ok(true);
 		}
 		return ResponseEntity.ok(false);

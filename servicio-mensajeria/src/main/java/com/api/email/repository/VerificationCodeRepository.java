@@ -30,8 +30,7 @@ public interface VerificationCodeRepository extends JpaRepository<VerificationCo
 			+ "	where u.id=? and v.codigo=?", nativeQuery = true)
 	VerificationCode getByUserIdAndCode(UUID userId, String codigo);
 
-	@Query(value = "select u.id from usuarios u inner join verificaciones v on u.correo_electronico "
-			+ "= v.correo_electronico where v.correo_electronico=?",nativeQuery = true)
+	@Query(value = "select u.id from usuarios u where u.correo_electronico=?",nativeQuery = true)
 	UUID getidOfUserByEmail(String email);
 }
 

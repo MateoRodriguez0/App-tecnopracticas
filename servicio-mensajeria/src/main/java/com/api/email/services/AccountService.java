@@ -1,7 +1,7 @@
 package com.api.email.services;
 
+import java.util.Base64;
 import java.util.Date;
-import java.util.UUID;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -25,23 +25,24 @@ import jakarta.transaction.Transactional;
 @Scope("prototype")
 public class AccountService {
 
-	public boolean validarCuenta(UUID userId,  String token) {
-		VerificationCode verificationCode= codeRepository.getByUserIdAndCode(userId, token);
-		if(verificationCode ==null) {
-			return false;
+	public boolean CuentaAprobada(String email) {
+		String cuerpo= plantillasService
+				.getCorreoCuentaVerificada(usuariosRespository.getnombreByEmail(email));
+		try {
+			emailServices.enviarCorreo(email, "Cuenta de TecnoPracticas aprobada", cuerpo);
+			return true;
+		} catch (MailException | MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		if(!validateExpirationCode(verificationCode.getExpiracion())) {
-			return false;
-		}
-		
-		return cuentaExitosa(verificationCode.getEmail());
-		
+		return false;
 	}
 	
 	
 	public Boolean EnviarCodigo (String email){
 		Date expiration = Date.from(Instant.now().plus(15, ChronoUnit.MINUTES));
 		String codigo=generarCodigo(email);
+		String encodedEmail =Base64.getEncoder().encodeToString(email.getBytes());
 		VerificationCode verificationCode = VerificationCode.builder()
 				.email(email).codigo(codigo)
 				.expiracion(expiration)
@@ -55,9 +56,8 @@ public class AccountService {
 			
 		}
 
-		
 		try {
-			String url= urlVerificacion+"?token="+codigo+"&user="+codeRepository.getidOfUserByEmail(email);
+			String url= urlVerificacion+"?token="+codigo+"-"+encodedEmail;
 			codeRepository.save(verificationCode);
 			emailServices.enviarCorreo(email,"verifica tu cuenta de TecnoPracticas", 
 				plantillasService.getCorreoVerificarCuenta(
@@ -70,29 +70,14 @@ public class AccountService {
 	}
 	
 	
-
-	
 	private String generarCodigo(String email) {
 		String sha256hex = Hashing.sha512()
 				  .hashString(email, StandardCharsets.UTF_8)
 				  .toString();
-	    return sha256hex;
+		return sha256hex;
 		
-	    
 	}
-	
-	private boolean cuentaExitosa(String email) {
-		String cuerpo= plantillasService
-				.getCorreoCuentaVerificada(usuariosRespository.getnombreByEmail(email));
-		try {
-			emailServices.enviarCorreo(email, "Cuenta de TecnoPracticas aprobada", cuerpo);
-			return true;
-		} catch (MailException | MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
-	}
+
 	
 	@Transactional
 	public void deleteVerificationCode(String email) {
@@ -100,13 +85,6 @@ public class AccountService {
 		  if (verificationCode != null) {
 		   codeRepository.delete(verificationCode);
 		  }
-	}
-	
-	
-	private Boolean validateExpirationCode(Date expiration) {
-		
-		return expiration.after(new Date());
-		
 	}
 	
 

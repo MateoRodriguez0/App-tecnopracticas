@@ -81,7 +81,6 @@ public class MensajeriaController {
 	public ResponseEntity<?> ofertaCreada() 
 			throws MailException, MessagingException{
 		
-	
 		return ResponseEntity.noContent().build();
 	}
 	
@@ -90,7 +89,6 @@ public class MensajeriaController {
 	private PostulacionesService postulaciones;
 	@Autowired
 	private VerificationCodeRepository codeRepository;
-	
 	@Autowired
 	private AccountService accountService;
 	

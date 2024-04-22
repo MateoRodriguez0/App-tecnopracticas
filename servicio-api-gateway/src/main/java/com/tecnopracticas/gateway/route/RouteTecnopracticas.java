@@ -10,7 +10,7 @@ public class RouteTecnopracticas {
 
 	@Bean
 	RouteLocator routesTecnopracticas(RouteLocatorBuilder builder) {
-		
+	
 		return builder.routes()
 				.build();
 	}

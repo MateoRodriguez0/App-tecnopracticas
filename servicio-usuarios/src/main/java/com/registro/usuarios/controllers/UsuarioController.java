@@ -1,6 +1,7 @@
 package com.registro.usuarios.controllers;
 import com.registro.usuarios.exception.EmailExistException;
 import com.registro.usuarios.models.Usuario;
+import com.registro.usuarios.repositories.UsuarioRepository;
 import com.registro.usuarios.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,4 +30,15 @@ public class UsuarioController {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
     }
+    
+    
+   /* @GetMapping(value = "/user/{email}")
+    public Usuario getMethodName(@PathVariable("email") String email) {
+    	Usuario usuario= usuarioRepository.findByCorreo(email);
+        return usuario;
+    }*/
+    
+    
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 }

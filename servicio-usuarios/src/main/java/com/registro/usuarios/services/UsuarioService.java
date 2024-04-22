@@ -17,7 +17,7 @@ public class UsuarioService {
 
 
     public Usuario registrarUsuario(String email, String password, String nombre) {
-        if (usuarioRepository.existsByEmail(email)) {
+        if (usuarioRepository.existsByCorreo(email)) {
             throw new EmailExistException("El correo electrónico ya existe.");
         }
 

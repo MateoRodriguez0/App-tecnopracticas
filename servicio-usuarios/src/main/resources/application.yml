@@ -1,8 +1,9 @@
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/tecnopracticas?useSSL=false&serverTimezone=America/Bogota
-    username: postgres
-    password: 12345678
+    username: usertecnopracticas
+    password: tecnopracticas
+
   jpa:
     generate-ddl: false
     show-sql: true

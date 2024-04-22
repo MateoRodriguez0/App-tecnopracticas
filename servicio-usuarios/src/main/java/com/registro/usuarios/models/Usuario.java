@@ -2,7 +2,8 @@ package com.registro.usuarios.models;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.util.Objects;
+
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -25,12 +26,18 @@ public class Usuario {
     private String correo;
 
     @Column(name = "email_verificado")
-    private String email;
+    private boolean verificado;
 
     @Column(name = "password")
     private String password;
 
     @Column(name = "fecha_registro")
     private String fecha_registro;
+    
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "roles_usuario",
+    joinColumns = {@JoinColumn(name="usuario_id")}, inverseJoinColumns = @JoinColumn(name="rol_id"))
+    private List<Rol> roles;
+    
 
 }

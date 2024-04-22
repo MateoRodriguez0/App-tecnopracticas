@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tecnopracticas?useSSL=false&serverTimezone=America/Bogota
+    username: postgres
+    password: 12345678
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    open-in-view: true
+
+  jackson:
+    time-zone: America/Bogota
+
+  basic:
+      enabled: true
+
+server:
+  port: 10451
+
+
+

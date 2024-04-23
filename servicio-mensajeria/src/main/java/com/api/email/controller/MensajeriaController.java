@@ -24,18 +24,15 @@ public class MensajeriaController {
 
 	
 	@PostMapping("/create-account")
-	public  ResponseEntity<?>  enviarCorreo(@RequestParam("email") String email) throws MessagingException{
-		
+	public  ResponseEntity<?>  enviarCorreo(@RequestParam("email") String email){
 		if(accountService.EnviarCodigo(email)) {
 			return ResponseEntity.ok(true);
 		}
-		
 		return ResponseEntity.ok(false);
 	}
 	
 	@GetMapping(value = "/verifications")
 	public List<VerificationCode>  getverifications(){
-		
 		return codeRepository.findAll();
 	}
 	
@@ -49,8 +46,15 @@ public class MensajeriaController {
 	}
 	
 	
-	@GetMapping(value = "/resset-pasword")
-	public ResponseEntity<?> ressetPasword(@RequestParam(name = "email")String email) 
+	@GetMapping(value = "/restore-pasword")
+	public ResponseEntity<?> restorePasword(@RequestParam(name = "email")String email) 
+			throws MailException, MessagingException{
+			
+		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping(value = "/restored-pasword")
+	public ResponseEntity<?> restoredPasword(@RequestParam(name = "email")String email) 
 			throws MailException, MessagingException{
 			
 		return ResponseEntity.noContent().build();

@@ -16,4 +16,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, UUID> {
     @Query(value = "select u.email_verificado from usuarios u where u.correo_electronico=?",
     		nativeQuery = true)
     boolean correoVerificado(String correo);
+
+    void deleteByCorreo(String email);
 }

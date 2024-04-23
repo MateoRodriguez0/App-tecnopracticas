@@ -21,6 +21,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.StructuredTaskScope;
+import java.util.concurrent.StructuredTaskScope.Subtask;
 
 @Service
 public class UsuarioService {
@@ -37,45 +40,45 @@ public class UsuarioService {
 
     @Transactional
     public boolean registarUsuario(Usuario usuario) {
-    	if(!usuarioRepository.existsByCorreo(usuario.getCorreo())) {
-    		usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
-    		usuario.setFecha_registro(Timestamp.from(Instant.now()));
-    		usuario.setVerificado(false);
-    		usuario.setRoles(List.of(rolesRepository.findByNombre("ESTUDIANTE")));
-    		Date expiration = Date.from(Instant.now().plus(10, ChronoUnit.MINUTES));
-    		String codigo=generarCodigo(usuario.getCorreo());
-    		String encodedEmail =Base64.getEncoder().encodeToString(usuario.getCorreo().getBytes());
-    		
-    		Verificacion verificacion = Verificacion.builder()
-    				.email(usuario.getCorreo())
-    				.codigo(codigo)
-    				.expiracion(expiration)
-    				.tipo(TipoVerification.cuenta)
-    				.build();
-    		
-    		if(verificacionRepository.existsByEmail(usuario.getCorreo())) {
-    			verificacion =verificacionRepository.findByEmail(usuario.getCorreo());
-    			verificacion.setCodigo(codigo);
-    			verificacion.setExpiracion(expiration);
-    			
-    		}
-    		
-    		String token= codigo+"-"+encodedEmail;
-    		usuarioRepository.save(usuario);
-    		verificacionRepository.save(verificacion);
-    		
-    		return client.VerificarCuenta(usuario.getCorreo(),token).getBody();
-    	}
-    	
-    	
-    	
-    	
-    	return false;
-    	
-    	
-    	
+		try (var scope = new StructuredTaskScope<Verificacion>()) {
+			String codigo = generarCodigo(usuario.getCorreo());
+			String encodedEmail = Base64.getEncoder().encodeToString(usuario.getCorreo().getBytes());
+			String token = codigo + "-" + encodedEmail;
+			Subtask<Verificacion> taskVerificacion = scope.fork(() -> {
+				Date expiration = Date.from(Instant.now().plus(10, ChronoUnit.MINUTES));
+				return Verificacion.builder()
+						.email(usuario.getCorreo())
+						.codigo(codigo)
+						.expiracion(expiration)
+						.tipo(TipoVerification.cuenta)
+						.build();
+			});
+
+			if (!usuarioRepository.existsByCorreo(usuario.getCorreo())) {
+				usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+				usuario.setFecha_registro(Timestamp.from(Instant.now()));
+				usuario.setVerificado(false);
+				usuario.setRoles(List.of(rolesRepository.findByNombre("ESTUDIANTE")));
+				scope.join();
+				Verificacion verificacion = taskVerificacion.get();
+				if (verificacionRepository.existsByEmailAndTipo(usuario.getCorreo(), TipoVerification.cuenta)) {
+					UUID id = verificacionRepository.getidOfVerificacionCuenta(usuario.getCorreo(), TipoVerification.cuenta.toString());
+					verificacion.setId(id);
+				}
+				usuarioRepository.save(usuario);
+				verificacionRepository.save(verificacion);
+				return client.VerificarCuenta(usuario.getCorreo(), token).getBody();
+			}
+			scope.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return false;
     }
-    
+
+	private boolean isvalidToken(Date date ){
+		return date.after(new Date());
+	}
     
    /** public Usuario registrarUsuario(String email, String password, String nombre) {
         if (usuarioRepository.existsByCorreo(email)) {

@@ -3,6 +3,7 @@ package com.registro.usuarios.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
 
@@ -12,6 +13,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Usuario {
+	
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -32,7 +34,7 @@ public class Usuario {
     private String password;
 
     @Column(name = "fecha_registro")
-    private String fecha_registro;
+    private Timestamp fecha_registro;
     
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "roles_usuario",

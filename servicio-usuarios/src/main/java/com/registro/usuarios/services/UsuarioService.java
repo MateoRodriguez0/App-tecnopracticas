@@ -4,7 +4,6 @@ import com.registro.usuarios.exception.EmailExistException;
 import com.registro.usuarios.models.Usuario;
 import com.registro.usuarios.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

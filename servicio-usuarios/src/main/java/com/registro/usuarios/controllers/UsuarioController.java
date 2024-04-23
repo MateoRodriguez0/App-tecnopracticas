@@ -1,4 +1,5 @@
 package com.registro.usuarios.controllers;
+import com.registro.usuarios.clients.MensajeriaClient;
 import com.registro.usuarios.exception.EmailExistException;
 import com.registro.usuarios.models.Usuario;
 import com.registro.usuarios.repositories.UsuarioRepository;
@@ -14,10 +15,6 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @Autowired
-    public UsuarioController(UsuarioService usuarioService) {
-        this.usuarioService = usuarioService;
-    }
 
     @PostMapping
     public ResponseEntity<Usuario> registrarUsuario(@RequestParam String email,
@@ -32,12 +29,16 @@ public class UsuarioController {
     }
     
     
-   /* @GetMapping(value = "/user/{email}")
-    public Usuario getMethodName(@PathVariable("email") String email) {
-    	Usuario usuario= usuarioRepository.findByCorreo(email);
-        return usuario;
+    /*@GetMapping(value = "/user/{email}")
+    public ResponseEntity<?> getMethodName(@PathVariable("email") String email) {
+    	
+        return client.enviarCorreo(email);
     }*/
     
+   
+    
+    @Autowired
+    private MensajeriaClient client;
     
     @Autowired
     private UsuarioRepository usuarioRepository;

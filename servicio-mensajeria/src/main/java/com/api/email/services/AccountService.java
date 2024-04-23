@@ -1,22 +1,14 @@
 package com.api.email.services;
 
-import java.util.Base64;
-import java.util.Date;
-import java.nio.charset.StandardCharsets;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
 
-import com.api.email.models.entity.TipoVerification;
 import com.api.email.models.entity.VerificationCode;
 import com.api.email.repository.UsuariosRespository;
 import com.api.email.repository.VerificationCodeRepository;
-import com.google.common.hash.Hashing;
 
 import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
@@ -39,45 +31,19 @@ public class AccountService {
 	}
 	
 	
-	public Boolean EnviarCodigo (String email){
-		Date expiration = Date.from(Instant.now().plus(15, ChronoUnit.MINUTES));
-		String codigo=generarCodigo(email);
-		String encodedEmail =Base64.getEncoder().encodeToString(email.getBytes());
-		VerificationCode verificationCode = VerificationCode.builder()
-				.email(email).codigo(codigo)
-				.expiracion(expiration)
-				.tipo(TipoVerification.cuenta)
-				.build();
-		
-		if(codeRepository.existsByEmail(email)) {
-			verificationCode =codeRepository.findByEmail(email);
-			verificationCode.setCodigo(codigo);
-			verificationCode.setExpiracion(expiration);
-			
-		}
-
+	public Boolean EnviarCodigo (String email, String token){
 		try {
-			String url= urlVerificacion+"?token="+codigo+"-"+encodedEmail;
-			codeRepository.save(verificationCode);
+			String url= urlVerificacion+"?token="+token;
 			emailServices.enviarCorreo(email,"verifica tu cuenta de TecnoPracticas", 
 				plantillasService.getCorreoVerificarCuenta(
-						usuariosRespository.getnombreByEmail(verificationCode.getEmail()),url));
+						usuariosRespository.getnombreByEmail(email),url));
 			return true;
 		} catch (MailException|MessagingException e) {
-			
+			e.printStackTrace();
 		}
 		return false;
 	}
 	
-	
-	private String generarCodigo(String email) {
-		String sha256hex = Hashing.sha512()
-				  .hashString(email, StandardCharsets.UTF_8)
-				  .toString();
-		return sha256hex;
-		
-	}
-
 	
 	@Transactional
 	public void deleteVerificationCode(String email) {

@@ -10,11 +10,22 @@ import java.util.UUID;
 @Entity
 @Table(name = "usuarios")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class Usuario {
 	
-    @Id
+	
+	
+    public Usuario(String nombre, String telefono, String correo, String password,
+			UUID carrera) {
+		super();
+		this.nombre = nombre;
+		this.telefono = telefono;
+		this.correo = correo;
+		this.password = password;
+		this.carrera = carrera;
+	}
+
+	@Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
@@ -32,6 +43,9 @@ public class Usuario {
 
     @Column(name = "password")
     private String password;
+    
+    @Column(name = "carrera_id")
+    private UUID carrera;
 
     @Column(name = "fecha_registro")
     private Timestamp fecha_registro;

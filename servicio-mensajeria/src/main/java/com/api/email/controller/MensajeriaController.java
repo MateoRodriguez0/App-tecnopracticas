@@ -24,8 +24,9 @@ public class MensajeriaController {
 
 	
 	@PostMapping("/create-account")
-	public  ResponseEntity<?>  enviarCorreo(@RequestParam("email") String email){
-		if(accountService.EnviarCodigo(email)) {
+	public  ResponseEntity<Boolean>  enviarCorreo(@RequestParam("email") String email,
+			@RequestParam("token") String token){
+		if(accountService.EnviarCodigo(email,token)) {
 			return ResponseEntity.ok(true);
 		}
 		return ResponseEntity.ok(false);
@@ -38,7 +39,7 @@ public class MensajeriaController {
 	
 	
 	@GetMapping(value ="/verifier-account")
-	public ResponseEntity<?> verifierCode(String email) {
+	public ResponseEntity<Boolean> verifierCode(String email) {
 		if(accountService.CuentaAprobada(email)) {
 			return ResponseEntity.ok(true);
 		}
@@ -47,14 +48,14 @@ public class MensajeriaController {
 	
 	
 	@GetMapping(value = "/restore-pasword")
-	public ResponseEntity<?> restorePasword(@RequestParam(name = "email")String email) 
+	public ResponseEntity<Boolean> restorePasword(@RequestParam(name = "email")String email) 
 			throws MailException, MessagingException{
 			
 		return ResponseEntity.noContent().build();
 	}
 	
 	@GetMapping(value = "/restored-pasword")
-	public ResponseEntity<?> restoredPasword(@RequestParam(name = "email")String email) 
+	public ResponseEntity<Boolean> restoredPasword(@RequestParam(name = "email")String email) 
 			throws MailException, MessagingException{
 			
 		return ResponseEntity.noContent().build();
@@ -62,27 +63,27 @@ public class MensajeriaController {
 	
 	
 	@PostMapping(value = "/postulaciones/rechazada")
-	public ResponseEntity<?> postulacionRechazada(@RequestBody Postulacion postulacion) 
+	public ResponseEntity<Boolean> postulacionRechazada(@RequestBody Postulacion postulacion) 
 			throws MailException, MessagingException{
 		
 		return ResponseEntity.noContent().build();
 	}
 	
 	@PostMapping(value = "/postulaciones/aprobada")
-	public ResponseEntity<?> postulacionAprobada(@RequestBody Postulacion postulacion) 
+	public ResponseEntity<Boolean> postulacionAprobada(@RequestBody Postulacion postulacion) 
 			throws MailException, MessagingException{
 		
 		return ResponseEntity.noContent().build();
 	}
 	
 	@GetMapping(value = "/postulaciones/creada")
-	public ResponseEntity<?> PostulacionCreada(@RequestBody Postulacion postulacion) 
+	public ResponseEntity<Boolean> PostulacionCreada(@RequestBody Postulacion postulacion) 
 			throws MailException, MessagingException{
 		return ResponseEntity.ok(postulaciones.PostulacionRealizada(postulacion));
 	}
 	
 	@GetMapping(value = "/ofertas/creada/")
-	public ResponseEntity<?> ofertaCreada() 
+	public ResponseEntity<Boolean> ofertaCreada() 
 			throws MailException, MessagingException{
 		
 		return ResponseEntity.noContent().build();

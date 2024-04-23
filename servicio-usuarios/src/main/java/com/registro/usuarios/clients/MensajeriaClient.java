@@ -11,15 +11,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface MensajeriaClient {
 
 	@PostMapping("/create-account")
-	public  ResponseEntity<?>  enviarCorreo(@RequestParam("email") String email);
+	public  ResponseEntity<Boolean>  VerificarCuenta(@RequestParam("email") String email,
+			@RequestParam("token") String token);
 	
 	@GetMapping(value ="/verifier-account")
-	public ResponseEntity<?> verifierCode(String email);
+	public ResponseEntity<Boolean> cuentaVerificada(String email);
 	
 	@GetMapping(value = "/restore-pasword")
-	public ResponseEntity<?> restorePasword(@RequestParam(name = "email")String email);
+	public ResponseEntity<Boolean> restaurarClave(@RequestParam(name = "email")String email,
+			@RequestParam("token") String token);
 	
 	@GetMapping(value = "/restored-pasword")
-	public ResponseEntity<?> restoredPasword(@RequestParam(name = "email")String email); 
+	public ResponseEntity<Boolean> claveRestaurada(@RequestParam(name = "email")String email); 
 	
 }

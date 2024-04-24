@@ -40,7 +40,7 @@ public class MensajeriaController {
 	
 	
 	@GetMapping(value ="/verifier-account")
-	public ResponseEntity<Boolean> verifierCode(String email) {
+	public ResponseEntity<Boolean> verifierCode(@RequestParam String email) {
 		if(accountService.CuentaAprobada(email)) {
 			return ResponseEntity.ok(true);
 		}

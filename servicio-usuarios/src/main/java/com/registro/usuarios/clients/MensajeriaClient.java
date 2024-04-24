@@ -15,7 +15,7 @@ public interface MensajeriaClient {
 			@RequestParam("token") String token);
 	
 	@GetMapping(value ="/verifier-account")
-	public ResponseEntity<Boolean> cuentaVerificada(String email);
+	public ResponseEntity<Boolean> cuentaVerificada(@RequestParam String email);
 	
 	@GetMapping(value = "/restore-pasword")
 	public ResponseEntity<Boolean> restaurarClave(@RequestParam(name = "email")String email,

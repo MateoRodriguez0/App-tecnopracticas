@@ -9,6 +9,8 @@ import com.registro.usuarios.repositories.RolesRepository;
 import com.registro.usuarios.repositories.UsuarioRepository;
 import com.registro.usuarios.repositories.VerificacionRepository;
 
+import jakarta.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -23,7 +25,7 @@ import java.util.List;
 
 
 @Service
-public class UsuarioService {
+public class RegistroService {
     @Autowired
     private UsuarioRepository usuarioRepository;
     @Autowired
@@ -87,6 +89,35 @@ public class UsuarioService {
     	return "El correo electronico ya se encuentra registrado.";	
     }
 
+
+    @Transactional
+    public String verificarCuenta(String token) {
+    	String [] parts= token.split("-");
+    	byte[] DecoderEmail=Base64.getDecoder().decode(parts[1]);
+    	String email= new String(DecoderEmail);
+    	
+    	if(usuarioRepository.existsByCorreo(email)) {
+    		if(!usuarioRepository.correoVerificado(email)) {
+        		Verificacion verificacion= verificacionRepository
+            			.findByCorreoAndCodigo(email, parts[0]);
+            	if(verificacion != null) {
+            		if(isvalidToken(verificacion.getExpiracion())) {
+            			usuarioRepository.validarCorreo(email);
+            			verificacionRepository
+            			.eliminarVerificacionCuenta(email, TipoVerification.cuenta.toString());
+            			client.cuentaVerificada(email);
+            			
+            			return "Cuenta verificada";
+            		}
+            		else{
+            			return "token caducado";
+            			}
+            		}
+            	}
+    		}
+    	return "token invalido";
+    }
+    
 	private boolean isvalidToken(Date date ){
 		return date.after(new Date());
 	}
@@ -99,6 +130,8 @@ public class UsuarioService {
 		return sha256hex;
 		
 	}
+    
+    
 	   
    
 }

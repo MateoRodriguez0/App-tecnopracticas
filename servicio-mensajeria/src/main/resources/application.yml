@@ -26,5 +26,5 @@ server:
 
 tecnopracticas:
   urls:
-   verificacion: http://localhost:10455/verifier-account
-   logo: https://tecnopracticas.s3.us-east-1.amazonaws.com/LOGO_NUEVO.png
+   verificacion: http://localhost:10451/verificar
+   logo: https://raw.githubusercontent.com/JeysonM11/plantilla_correos/main/logos/LOGO_NUEVO.png

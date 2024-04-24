@@ -5,7 +5,6 @@ spring:
     password: tecnopracticas
   jpa:
     generate-ddl: false
-    show-sql: true
     open-in-view: true
 
   jackson:

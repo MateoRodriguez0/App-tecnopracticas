@@ -11,6 +11,8 @@ import com.registro.usuarios.models.Verificacion;
 
 
 
+
+
 public interface VerificacionRepository extends JpaRepository<Verificacion, UUID>{
 
 	Verificacion findByEmail(String email);
@@ -18,6 +20,11 @@ public interface VerificacionRepository extends JpaRepository<Verificacion, UUID
 	void deleteByEmail(String email);
 	boolean existsByEmailAndTipo(String email, TipoVerification tipo);
 	
+	@Query(value = "select v.id, v.correo_electronico, v.codigo, v.fecha_expiracion, v.tipo"
+			+ " from verificaciones as v join usuarios as u "
+			+ "	on v.correo_electronico = u.correo_electronico"
+			+ "	where u.correo_electronico=? and CAST(v.tipo AS character varying)=?",nativeQuery = true)
+	Verificacion findByEmailAndTipo(String email, String tipo);
 	
 	@Query(value = "select fecha_expiracion from verificaciones as v "
 			+ "where v.correo_electronico=? and CAST(v.tipo AS character varying)=?",nativeQuery = true)

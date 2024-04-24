@@ -1,5 +1,7 @@
 package com.registro.usuarios.controllers;
 
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.registro.usuarios.models.Usuario;
 import com.registro.usuarios.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +16,11 @@ public class UsuarioController {
     
 
     @PostMapping("/registrar")
-    public ResponseEntity<Boolean> registrarUsuario(@RequestBody Usuario usuario) {
-    	 return ResponseEntity.ok(usuarioService.registarUsuario(usuario));
+    public ResponseEntity<?> registrarUsuario(@RequestBody Usuario usuario) {
+    	ObjectNode node= new ObjectNode(JsonNodeFactory.instance);
+    	node.put("status", 200);
+    	node.put("message",usuarioService.registarUsuario(usuario));
+    	return ResponseEntity.ok(node);
     }
     /*@PostMapping
     public ResponseEntity<Usuario> registrarUsuario(@RequestParam String email,

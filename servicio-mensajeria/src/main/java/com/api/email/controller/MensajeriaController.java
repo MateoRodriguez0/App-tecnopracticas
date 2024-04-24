@@ -27,6 +27,7 @@ public class MensajeriaController {
 	public  ResponseEntity<Boolean>  enviarCorreo(@RequestParam("email") String email,
 			@RequestParam("token") String token){
 		if(accountService.EnviarCodigo(email,token)) {
+			
 			return ResponseEntity.ok(true);
 		}
 		return ResponseEntity.ok(false);

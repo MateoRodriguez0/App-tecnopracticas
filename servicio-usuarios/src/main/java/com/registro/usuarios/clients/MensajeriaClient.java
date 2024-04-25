@@ -17,11 +17,11 @@ public interface MensajeriaClient {
 	@GetMapping(value ="/verifier-account")
 	public ResponseEntity<Boolean> cuentaVerificada(@RequestParam String email);
 	
-	@GetMapping(value = "/restore-pasword")
-	public ResponseEntity<Boolean> restaurarClave(@RequestParam(name = "email")String email,
+	@GetMapping(value = "/password-reset")
+	public ResponseEntity<Boolean> restablecerClave(@RequestParam(name = "email")String email,
 			@RequestParam("token") String token);
 	
-	@GetMapping(value = "/restored-pasword")
-	public ResponseEntity<Boolean> claveRestaurada(@RequestParam(name = "email")String email); 
+	@GetMapping(value = "/password-restored")
+	public ResponseEntity<Boolean> claveRestablecida(@RequestParam(name = "email")String email); 
 	
 }

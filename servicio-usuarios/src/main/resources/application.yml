@@ -3,6 +3,12 @@ spring:
     url: jdbc:postgresql://localhost:5432/tecnopracticas?useSSL=false&serverTimezone=America/Bogota
     username: usertecnopracticas
     password: tecnopracticas
+  cloud:
+    openfeign:
+      client:
+        config:
+          mensajeriaClient:
+           read-timeout: 600
   jpa:
     generate-ddl: false
     open-in-view: true

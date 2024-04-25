@@ -40,6 +40,9 @@ public class Usuario {
 
     @Column(name = "email_verificado")
     private boolean verificado;
+    
+    @Column(name = "activo")
+    private boolean activo;
 
     @Column(name = "password")
     private String password;

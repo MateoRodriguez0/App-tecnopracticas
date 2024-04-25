@@ -42,7 +42,7 @@ public interface VerificacionRepository extends JpaRepository<Verificacion, UUID
 
 	@Query(value = "select v.id from verificaciones v where v.correo_electronico=? and" +
 			" CAST(v.tipo AS character varying)=?",nativeQuery = true)
-	UUID getidOfVerificacionCuenta(String email,String tipo);
+	UUID getidOfVerificacionType(String email,String tipo);
 	
 	@Modifying
 	@Query(value = "delete from verificaciones v where v.correo_electronico=? and" +

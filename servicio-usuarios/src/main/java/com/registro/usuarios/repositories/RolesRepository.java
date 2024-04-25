@@ -9,4 +9,6 @@ import com.registro.usuarios.models.Rol;
 public interface RolesRepository extends JpaRepository<Rol, UUID> {
 
 	Rol findByNombre(String nombre);
+	
+	
 }

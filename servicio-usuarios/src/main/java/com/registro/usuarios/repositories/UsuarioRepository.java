@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.sql.Timestamp;
 import java.util.UUID;
 
 @Repository
@@ -23,8 +25,24 @@ public interface UsuarioRepository extends JpaRepository<Usuario, UUID> {
     		nativeQuery = true)
     UUID getIdByCorreo(String correo);
     
+    @Query(value = "select u.fecha_registro from usuarios u where u.correo_electronico=?",
+    		nativeQuery = true)
+    Timestamp getFechaRegistrpByCorreo(String correo);
+    
     @Modifying
     @Query(value = "update usuarios u set email_verificado=true where u.correo_electronico=?",
     		nativeQuery = true)
     void validarCorreo(String correo);
+    
+    
+    @Modifying
+    @Query(value = "update usuarios u set password=? where u.correo_electronico=?",
+    		nativeQuery = true)
+    void restablecerclave(String clave, String correo);
+    
+	@Modifying
+	@Query(value = "update usuarios set activo=true where correo_electronico=? " ,nativeQuery =  true)
+	void habilitarUsuario(String correo );
+	
+	
 }

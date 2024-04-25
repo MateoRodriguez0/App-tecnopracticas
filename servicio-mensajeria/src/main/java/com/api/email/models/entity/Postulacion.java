@@ -11,16 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Postulacion {
 	
-	public Postulacion(String email_usuario, String nombre_oferta, String empresa) {
-		super();
-		this.email_usuario = email_usuario;
-		this.nombre_oferta = nombre_oferta;
-		this.empresa = empresa;
-	}
-	private String email_usuario;
-    private String nombre_oferta;
+	private String email;
+    private String puesto;
     private String empresa;
-    private String nombre_usuario;
 
 
 }

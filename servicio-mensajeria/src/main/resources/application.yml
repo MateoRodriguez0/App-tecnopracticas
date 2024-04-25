@@ -26,5 +26,6 @@ server:
 
 tecnopracticas:
   urls:
-   verificacion: http://localhost:10451/verificar
+   verificacion: http://localhost:10450/usuarios/verificar
+   restablecer-clave: http://localhost:10451/password-reset
    logo: https://raw.githubusercontent.com/JeysonM11/plantilla_correos/main/logos/LOGO_NUEVO.png

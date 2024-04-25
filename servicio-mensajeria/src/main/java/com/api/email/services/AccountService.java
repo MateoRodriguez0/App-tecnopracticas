@@ -67,9 +67,10 @@ public class AccountService {
 		return false;
 	}
 	
-	public boolean RestablecerClave(String email) {
+	public boolean RestablecerClave(String email, String token) {
+		String url= urlPasswordReset+"?token="+token;
 		String cuerpo= plantillasService
-				.getCorreoRestablecerClave(usuariosRespository.getnombreByEmail(email));
+				.getCorreoRestablecerClave(usuariosRespository.getnombreByEmail(email),url);
 		try {
 			emailServices.enviarCorreo(email, "Restablece tu contraseña de tecnopracticas", cuerpo);
 			return true;
@@ -95,4 +96,7 @@ public class AccountService {
 	
 	@Value("${tecnopracticas.urls.verificacion}")
 	private String urlVerificacion;
+	
+	@Value("${tecnopracticas.urls.restablecer-clave}")
+	private String urlPasswordReset;
 }

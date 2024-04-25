@@ -5,6 +5,7 @@ import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
 
 import com.api.email.models.entity.Postulacion;
+import com.api.email.repository.UsuariosRespository;
 
 import jakarta.mail.MessagingException;
 
@@ -14,10 +15,10 @@ public class PostulacionesService {
 
 	public boolean PostulacionRealizada(Postulacion pos) {
 		String cuerpo= plantillasService.getCorreoPostulacionRealizada(
-				pos.getNombre_usuario(), pos.getNombre_oferta(), pos.getEmpresa());
+				usuariosRespository.getnombreByEmail(pos.getEmail()), pos.getPuesto(), pos.getEmpresa());
 		try {
-			emailServices.enviarCorreo(pos.getEmail_usuario(),
-					"Postulación a "+pos.getNombre_oferta()+" - "+pos.getNombre_usuario(), cuerpo);
+			emailServices.enviarCorreo(pos.getEmail(),
+					"Solicitud para el puesto "+pos.getPuesto()+ " en "+ pos.getEmpresa(), cuerpo);
 			return true;
 		} catch (MailException | MessagingException e) {
 			// TODO Auto-generated catch block
@@ -28,10 +29,10 @@ public class PostulacionesService {
 	
 	public boolean PostulacionAprobada(Postulacion pos) {
 		String cuerpo= plantillasService.getCorreoPostulacionAprobada(
-				pos.getNombre_usuario(), pos.getNombre_oferta(), pos.getEmpresa());
+				usuariosRespository.getnombreByEmail(pos.getEmail()), pos.getPuesto(), pos.getEmpresa());
 		try {
-			emailServices.enviarCorreo(pos.getEmail_usuario(),
-					"Su postulación a "+pos.getNombre_oferta()+" ha sido aprobada", cuerpo);
+			emailServices.enviarCorreo(pos.getEmail(),
+					"Solicitud para el puesto "+pos.getPuesto()+ " en "+ pos.getEmpresa(), cuerpo);
 			return true;
 		} catch (MailException | MessagingException e) {
 			// TODO Auto-generated catch block
@@ -43,11 +44,10 @@ public class PostulacionesService {
 	
 	public boolean PostulacionRechazada(Postulacion pos) {
 		String cuerpo= plantillasService.getCorreoPostulacionRechazada(
-				pos.getNombre_usuario(), pos.getNombre_oferta(), pos.getEmpresa());
-	
+				usuariosRespository.getnombreByEmail(pos.getEmail()), pos.getPuesto(), pos.getEmpresa());
 		try {
-			emailServices.enviarCorreo(pos.getEmail_usuario(),
-					"Su postulación a "+pos.getNombre_oferta()+" no ha sido seleccionada", cuerpo);
+			emailServices.enviarCorreo(pos.getEmail(),
+					"Solicitud para el puesto "+pos.getPuesto()+ " en "+ pos.getEmpresa(), cuerpo);
 			return true;
 		} catch (MailException | MessagingException e) {
 			// TODO Auto-generated catch block
@@ -62,4 +62,7 @@ public class PostulacionesService {
 	
 	@Autowired
 	private PlantillasService plantillasService;
+	
+	@Autowired
+	private UsuariosRespository usuariosRespository;
 }

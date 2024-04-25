@@ -11,7 +11,7 @@
 	<groupId>com.tecnopracticas.gateway</groupId>
 	<artifactId>coom.tecnopracticas.app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>servicio-api-gateway</name>
 	<description>servicio gateway para la entrada de todas las peticiones a los servicios de tecnopracticas</description>
 	<properties>
@@ -19,10 +19,6 @@
 		<spring-cloud.version>2023.0.1</spring-cloud.version>
 	</properties>
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -53,6 +49,10 @@
 			<groupId>io.projectreactor</groupId>
 			<artifactId>reactor-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
 	</dependencies>
 	<dependencyManagement>

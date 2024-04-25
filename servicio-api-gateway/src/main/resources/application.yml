@@ -1,6 +1,6 @@
 spring:
   application:
     name: servicio-api-gateway
-
 server:
   port: 10450
+  

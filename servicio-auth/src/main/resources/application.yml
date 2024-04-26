@@ -1,0 +1,11 @@
+security:
+  jwt:
+    expiration:
+     token:  20
+     refresh-token: 30
+    key: 960f9991327c16396c2de562105ab7c08b9e26c56bd4db98c31ac9df577347c297a7ba7ad16a9d42e581e54be3e014679b2185a960e619b145d07cf356ae98c0
+spring:
+  application:
+    name: servicio-auth
+server:
+  port: 10453

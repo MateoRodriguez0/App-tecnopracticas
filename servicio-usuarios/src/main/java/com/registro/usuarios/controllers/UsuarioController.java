@@ -6,8 +6,12 @@ import com.registro.usuarios.models.RestablecerClave;
 import com.registro.usuarios.models.Usuario;
 import com.registro.usuarios.services.ClaveService;
 import com.registro.usuarios.services.RegistroService;
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,9 +24,20 @@ public class UsuarioController {
     private ClaveService claveService;
 
     @PostMapping("/registrar")
-    public ResponseEntity<?> registrarUsuario(@RequestBody Usuario usuario) {
+    public ResponseEntity<?> registrarUsuario(@Valid @RequestBody Usuario usuario, BindingResult result) {
     	ObjectNode node= new ObjectNode(JsonNodeFactory.instance);
     	node.put("status", 200);
+    	if(!usuario.passwordIsValid()) {
+    		node.put("error_password", "la clave no cumple con los requisitos");
+    	}
+    	if(result.hasErrors()|| !usuario.passwordIsValid()) {
+    		for (ObjectError error : result.getAllErrors()) {
+    			node.put("error_"+error.getCode(), error.getDefaultMessage());
+			}
+    	
+    		return ResponseEntity.ok(node);
+    	}
+    	
     	try {
 			node.put("message",registroService.registarUsuario(usuario));
 		} catch (Exception e) {

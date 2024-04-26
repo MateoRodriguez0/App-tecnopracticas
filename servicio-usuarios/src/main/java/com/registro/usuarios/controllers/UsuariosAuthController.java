@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.registro.usuarios.models.UsuarioAuth;
 import com.registro.usuarios.services.AuthUsuarioSerivice;
 
 @RestController
@@ -15,7 +16,7 @@ public class UsuariosAuthController {
 	private AuthUsuarioSerivice authUsuarioSerivice; 
 
 	@GetMapping(value="/buscar")
-	public ResponseEntity<?> verificarUsuario(@RequestParam String email) {
+	public ResponseEntity<UsuarioAuth> buscarUsuario(@RequestParam String email) {
 	    	return ResponseEntity.ok(authUsuarioSerivice.getByCorreo(email));
 	    }
 	 

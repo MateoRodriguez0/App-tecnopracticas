@@ -14,15 +14,22 @@ public class RouteTecnopracticas {
 	
 		return builder.routes()
 				.route("servicio-usuarios",p ->
-				p.path("/usuarios/**")
-				.and()
-				.predicate(s ->{
-					return !s.getRequest().getURI()
-							.getPath().toString().equals("/usuarios/buscar");
-				})
-				.and().method(HttpMethod.GET,HttpMethod.POST)
-				.filters(f ->f.stripPrefix(1) )
-				.uri("http://localhost:10451"))
+					p.path("/usuarios/**")
+					.and()
+					.predicate(s ->{
+						return !s.getRequest().getURI()
+								.getPath().toString().equals("/usuarios/buscar");
+					})
+					.and()
+					.method(HttpMethod.GET,HttpMethod.POST)
+					.filters(f ->f.stripPrefix(1) )
+					.uri("http://localhost:10451"))
+				.route("servicio-auth",p ->
+					p.path("/auth/**")
+					.and()
+					.method(HttpMethod.POST)
+					.filters(f ->f.stripPrefix(1))
+					.uri("http://localhost:10453"))
 				.build();
 	}
 	

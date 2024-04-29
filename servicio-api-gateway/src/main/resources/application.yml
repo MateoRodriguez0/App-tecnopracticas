@@ -1,6 +1,15 @@
 spring:
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+         '[/**]':
+           allowedOrigins: "*"
+           allowedMethods:
+            - GET
+            - POST
+          
   application:
     name: servicio-api-gateway
 server:
   port: 10450
-  

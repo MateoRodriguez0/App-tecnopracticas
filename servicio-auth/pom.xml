@@ -6,13 +6,13 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.5</version>
+		<version>3.2.4</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.tecnopracticas.auth</groupId>
-	<artifactId>coom.tecnopracticas.app</artifactId>
+	<groupId>coom.tecnopracticas.app</groupId>
+	<artifactId>com.tecnopracticas.auth</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>servicio-auth</name>
 	<description>servicio auth para la autenticacion y autorizacion de usuarios</description>
 	<properties>

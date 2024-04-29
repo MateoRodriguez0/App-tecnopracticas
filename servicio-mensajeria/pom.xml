@@ -9,8 +9,8 @@
 		<version>3.2.4</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.API.EMAIL</groupId>
-	<artifactId>api-email</artifactId>
+	<groupId>com.tecnopracticas.app</groupId>
+	<artifactId>com.tecnopracticas.mensajeria</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>API-EMAIL</name>
 	<description>Demo project for Spring Boot</description>

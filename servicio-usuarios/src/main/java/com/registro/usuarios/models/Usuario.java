@@ -18,16 +18,16 @@ import org.hibernate.validator.constraints.Length;
 @NoArgsConstructor
 public class Usuario {
 	
-    public Usuario(String nombre, String telefono, String correo, String password,
+    public Usuario(String nombre, /*String telefono,*/ String correo, String password,
 			UUID carrera) {
 		super();
 		this.nombre = nombre;
-		this.telefono = telefono;
+		//this.telefono = telefono;
 		this.correo = correo;
 		this.password = password;
 		this.carrera = carrera;
 	}
-
+    
 	@Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;

@@ -8,8 +8,8 @@
 		<version>3.2.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.tecnopracticas.gateway</groupId>
-	<artifactId>coom.tecnopracticas.app</artifactId>
+	<groupId>com.tecnopracticas.app</groupId>
+	<artifactId>com.tecnopracticas.gateway</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>servicio-api-gateway</name>

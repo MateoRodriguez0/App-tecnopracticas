@@ -35,7 +35,6 @@ public class JwtServicesImpl implements JwtServices{
 
 	@Override
 	public String ExtractUsername(String jwt) {
-	
 		// TODO Auto-generated method stub
 		return extractClaims(jwt).getSubject();
 	}

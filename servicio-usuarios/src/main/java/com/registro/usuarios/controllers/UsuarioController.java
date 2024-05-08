@@ -15,7 +15,6 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-//@RequestMapping("/api/usuarios")
 public class UsuarioController {
     @Autowired
     private RegistroService registroService;

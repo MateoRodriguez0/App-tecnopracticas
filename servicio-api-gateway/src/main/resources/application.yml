@@ -1,15 +1,20 @@
 spring:
+  application:
+    name: servicio-api-gateway
   cloud:
     gateway:
       globalcors:
-        cors-configurations:
-         '[/**]':
-           allowedOrigins: "*"
-           allowedMethods:
-            - GET
-            - POST
-          
-  application:
-    name: servicio-api-gateway
+        add-to-simple-url-handler-mapping: true
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://127.0.0.1:5501"
+            allowedHeaders: "*" 
+            allowedMethods:
+              - POST
+              - GET
+              - OPTIONS
+              - PUT 
+              - DELETE
+     
 server:
   port: 10450

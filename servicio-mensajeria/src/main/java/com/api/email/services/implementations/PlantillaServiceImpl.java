@@ -227,7 +227,7 @@ public class PlantillaServiceImpl implements PlantillasService {
 				+ "        significativa a nuestro equipo.\r\n"
 				+ "      </p>\r\n"
 				+ "      <p>\r\n"
-				+ "        El equipo de [Nombre de la Empresa/Organización] se encuentra emocionado\r\n"
+				+ "        El equipo de "+empresa+" se encuentra emocionado\r\n"
 				+ "        y ansiosos por trabajar contigo.\r\n"
 				+ "      </p>\r\n"
 				+ "      <p>¡Felicidades nuevamente y pronto nos pondremos en contacto contigo\r\n"
@@ -377,11 +377,75 @@ public class PlantillaServiceImpl implements PlantillasService {
 				+ "    </div>";
 	}
 	
+	@Override
+	public String getCorreoPostulacionEnRevision(String nombre_usuario, String oferta, String empresa) {
+		// TODO Auto-generated method stub
+		return "<div class=\"container\">\r\n"
+				+ "      <style>\r\n"
+				+ "        body {\r\n"
+				+ "          background-color: #f7f7f7;\r\n"
+				+ "          font-family: \"Roboto\", sans-serif;\r\n"
+				+ "          margin: 0;\r\n"
+				+ "          padding: 0;\r\n"
+				+ "        }\r\n"
+				+ "        .container {\r\n"
+				+ "          max-width: 800px;\r\n"
+				+ "          margin: 30px auto;\r\n"
+				+ "          padding: 40px; /* Aumentado el padding para más espacio */\r\n"
+				+ "          background-color: #ffffff;\r\n"
+				+ "          border: 1px solid #ddd;\r\n"
+				+ "          text-align: left; /* Alinea el texto a la izquierda */\r\n"
+				+ "          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);\r\n"
+				+ "          border-radius: 5px;\r\n"
+				+ "        }\r\n"
+				+ "  \r\n"
+				+ "        .footer {\r\n"
+				+ "          font-size: 12px;\r\n"
+				+ "          color: #777777;\r\n"
+				+ "          margin-top: 20px;\r\n"
+				+ "        }\r\n"
+				+ "        .header {\r\n"
+				+ "          font-weight: bold; /* Hace el título en negritas */\r\n"
+				+ "        }\r\n"
+				+ "        .btn-verificar-correo {\r\n"
+				+ "          display: inline-block;\r\n"
+				+ "          padding: 8px 16px; /* Ajusta el padding según lo necesites */\r\n"
+				+ "          background-color: #00466a;\r\n"
+				+ "          color: white;\r\n"
+				+ "          border-radius: 4px; /* Ajusta el radio según lo necesites */\r\n"
+				+ "          font-weight: bold;\r\n"
+				+ "          margin-bottom: 4px; /* Ajusta el margen inferior según lo necesites */\r\n"
+				+ "          text-decoration: none; /* Elimina el subrayado del enlace */\r\n"
+				+ "        }\r\n"
+				+ "      </style>\r\n"
+				+ "      <img\r\n"
+				+ "        src="+logoRecurso+""
+				+ "        alt=Logo"
+				+ "        style=\"height: 150px; width: 230px; margin: 0 auto 20px; display: block\"\r\n"
+				+ "      />\r\n"
+				+ "      <h1 class=\"header\">Estimado/a "+nombre_usuario+",</h1>\r\n"
+				+ "      <p>\r\n"
+				+ "         Nos complace informarte que tu solicitud para el puesto de"
+				+ "        <strong>"+oferta+"</strong> en <strong>"+empresa+"</strong> "
+				+ "      se encuentra en proceso de revisión."
+				+ "      </p>\r\n"
+				+ "      <p>\r\n"
+				+ "       <p>\r\n"
+				+ "        Si tu perfil coincide con los requisitos y necesidades de la posición,\r\n"
+				+ "        pronto te lo haremos saber para proporcionarte más información "
+				+ "        sobre el proceso de selección."
+				+ "      </p>"
+				+ "      <p>Le pedimos que nos tenga paciencia, ya que a veces el proceso de revisión se puede tardar un poco.\r\n"
+				+ "      </p>"
+				+ "      <p class=\"footer\">Atentamente,</p>\r\n"
+				+ "      <p class=\"footer\">Equipo de asistencia TecnoPracticas</p>\r\n"
+				+ "      <p class=\"footer\">\r\n"
+				+ "        Es un correo generado automáticamente. Las respuestas enviadas a esta\r\n"
+				+ "        dirección de correo no se revisan.\r\n"
+				+ "      </p>\r\n"
+				+ "    </div>";
+	}
 	
-
-	@Value("${tecnopracticas.urls.logo}")
-	private String logoRecurso;
-
 
 
 	@Override
@@ -431,5 +495,11 @@ public class PlantillaServiceImpl implements PlantillasService {
 				+ "      </p>\r\n"
 				+ "    </div>";
 	}
+
+
+
+	@Value("${tecnopracticas.urls.logo}")
+	private String logoRecurso;
+
 	
 }

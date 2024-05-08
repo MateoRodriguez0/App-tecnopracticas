@@ -42,6 +42,20 @@ public class PostulacionesService {
 	
 	}
 	
+	public boolean PostulacionEnRevision(Postulacion pos) {
+		String cuerpo= plantillasService.getCorreoPostulacionEnRevision(
+				usuariosRespository.getnombreByEmail(pos.getEmail()), pos.getPuesto(), pos.getEmpresa());
+		try {
+			emailServices.enviarCorreo(pos.getEmail(),
+					"Solicitud para el puesto "+pos.getPuesto()+ " en "+ pos.getEmpresa(), cuerpo);
+			return true;
+		} catch (MailException | MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	public boolean PostulacionRechazada(Postulacion pos) {
 		String cuerpo= plantillasService.getCorreoPostulacionRechazada(
 				usuariosRespository.getnombreByEmail(pos.getEmail()), pos.getPuesto(), pos.getEmpresa());

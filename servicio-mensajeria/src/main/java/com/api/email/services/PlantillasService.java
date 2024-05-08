@@ -9,5 +9,6 @@ public interface PlantillasService {
 	public String getCorreoPostulacionRechazada(String nombre_usuario, String oferta, String empresa);
 	public String getCorreoRestablecerClave(String nombre_usuario, String url);
 	public String getCorreoClaveCambiada(String nombre_usuario);
+	public String getCorreoPostulacionEnRevision(String nombre_usuario, String oferta, String empresa);
 	
 }

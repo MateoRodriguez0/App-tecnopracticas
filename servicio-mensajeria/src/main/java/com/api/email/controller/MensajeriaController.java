@@ -81,6 +81,11 @@ public class MensajeriaController {
 		return ResponseEntity.ok(postulaciones.PostulacionRealizada(postulacion));
 	}
 	
+	@PostMapping(value = "/postulaciones/revision")
+	public ResponseEntity<Boolean> PostulacionEnRevision(@RequestBody Postulacion postulacion){
+		return ResponseEntity.ok(postulaciones.PostulacionEnRevision(postulacion));
+	}
+	
 	
 	@Autowired
 	private PostulacionesService postulaciones;

@@ -9,13 +9,14 @@ import lombok.NoArgsConstructor;
 import java.sql.Timestamp;
 import java.util.UUID;
 
+
 @Entity
-@Table(name = "ofertas")
+@Table(name = "empresas")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Oferta {
+public class Empresa {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -23,21 +24,15 @@ public class Oferta {
     @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "descripcion")
-    private String descripcion;
+    @Column(name = "telefono")
+    private String telefono;
 
-    @Column(name = "fecha_creacion")
-    private Timestamp fecha_crecion;
+    @Column(name = "dirrecion")
+    private String dirrecion;
 
-    @Column(name = "fecha_actualizacion")
-    private Timestamp fecha_actualizacion;
+    @Column(name = "email")
+    private String email;
 
-    @Column(name = "carrera_id")
-    private UUID carrera;
-
-    @ManyToOne
-    @JoinColumn(name = "empresa_id")
-    private Empresa empresa;
-
+    @Column(name = "fecha_registro")
+    private Timestamp fecha_registro;
 }
-

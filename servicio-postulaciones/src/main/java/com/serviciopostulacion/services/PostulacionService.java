@@ -1,8 +1,10 @@
 package com.serviciopostulacion.services;
 
 import com.serviciopostulacion.model.EstadoPostulacion;
+import com.serviciopostulacion.model.Oferta;
 import com.serviciopostulacion.model.Postulacion;
 import com.serviciopostulacion.repositories.PostulacionRepository;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,9 +71,12 @@ public class PostulacionService {
         }
         return null;
     }
+
     //Listar postulaciones de un usurio
     public Optional<Postulacion> getPostulacionesById(UUID Id) {
         return postulacionRepository.findById(Id);
     }
+
+
 }
 

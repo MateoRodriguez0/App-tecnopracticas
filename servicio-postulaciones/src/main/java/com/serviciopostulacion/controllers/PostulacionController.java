@@ -31,7 +31,6 @@ public class PostulacionController {
         return postulacionService.obtenerPostulacionPorId(id);
     }
 
-
     @PostMapping
     public Postulacion crearPostulacion(@RequestBody Postulacion postulacion) {
         return postulacionService.crearPostulacion(postulacion);

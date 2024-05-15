@@ -1,29 +1,29 @@
-spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/tecnopracticas?useSSL=false&serverTimezone=America/Bogota
-    username: usertecnopracticas
-    password: tecnopracticas
-  cloud:
-    openfeign:
-      client:
-        config:
-          mensajeriaClient:
-           read-timeout: 600
-  jpa:
-    generate-ddl: false
-    open-in-view: true
+  spring:
+    datasource:
+      url: jdbc:postgresql://localhost:5432/tecnopracticas?useSSL=false&serverTimezone=America/Bogota
+      username: usertecnopracticas
+      password: tecnopracticas
+    cloud:
+      openfeign:
+        client:
+          config:
+            mensajeriaClient:
+             read-timeout: 600
+    jpa:
+      generate-ddl: false
+      open-in-view: true
 
-  jackson:
-    time-zone: America/Bogota
+    jackson:
+      time-zone: America/Bogota
 
-  basic:
-      enabled: true
-  threads:
-    virtual:
-      enabled: true
+    basic:
+        enabled: true
+    threads:
+      virtual:
+        enabled: true
 
-server:
-  port: 10451
+  server:
+    port: 10451
 
 
 

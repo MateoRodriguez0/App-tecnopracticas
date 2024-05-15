@@ -1,14 +1,13 @@
-package com.api.email;
+package com.serviciopostulacion;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ApiEmailApplication {
+public class ServicioPostulacionApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ApiEmailApplication.class, args);
+		SpringApplication.run(ServicioPostulacionApplication.class, args);
 	}
 
 }
-

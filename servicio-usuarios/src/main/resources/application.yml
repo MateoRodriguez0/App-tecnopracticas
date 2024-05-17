@@ -8,22 +8,31 @@ spring:
       client:
         config:
           mensajeriaClient:
-           read-timeout: 600
+           read-timeout: 100
+    gcp:
+     credentials:
+      location: classpath:/tecnopracticas-f8672c420e5b.json
+     project-id: tecnopracticas
   jpa:
     generate-ddl: false
     open-in-view: true
 
   jackson:
     time-zone: America/Bogota
-
-  basic:
-      enabled: true
+ 
+  servlet:
+    multipart:
+      max-file-size: 5MB
+          
   threads:
     virtual:
       enabled: true
 
-server:
-  port: 10451
-
-
-
+tecnopracticas:
+  gcp:
+   project_id: tecnopracticas
+   credentials: tecnopracticas-f8672c420e5b.json
+  paths:
+   cvs: curriculums
+   ruta_cv: ${gcs-resource-test-bucket}/${tecnopracticas.paths.cvs}
+gcs-resource-test-bucket: tecnopracticas-resources

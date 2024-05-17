@@ -76,17 +76,27 @@ public class RegistroService {
         		 client.VerificarCuenta(usuario.getCorreo(),token).getBody();
         		}catch (feign.RetryableException e) {
         			if(e.getCause().getClass()==java.net.SocketTimeoutException.class) {
-        				return "Cuenta registrada, correo de verificacion enviado.";
+        				return "EmailVerificacionEnviado";
          			};
          			
-        			return "Cuenta registrada, correo de verificacion No enviado.";
+        			return "CuentaRegistrada_EmailNoEnviado";
     			}
      		
-     		return "Cuenta registrada, correo de verificacion No se pudo enviar.";
+    		return "CuentaRegistrada_EmailNoEnviado";
     	}
     	
     	if(usuarioRepository.existsByCorreo(usuario.getCorreo())&& 
     			! usuarioRepository.correoVerificado(usuario.getCorreo())) {
+    		try {
+				 String token=futureCodigo.get()+"-"+encodedEmail.get();
+       		 client.VerificarCuenta(usuario.getCorreo(),token).getBody();
+       		}catch (feign.RetryableException e) {
+       			if(e.getCause().getClass()==java.net.SocketTimeoutException.class) {
+       				return "EmailVerificacionEnviado";
+        			};
+        			
+        			return "CuentaRegistrada_EmailNoEnviado";
+   			}
     		boolean tokenValido=isvalidToken(verificacionRepository.getExpirationByEmail(usuario.getCorreo(),
 					TipoVerification.cuenta.toString()));
     		
@@ -108,19 +118,19 @@ public class RegistroService {
     			}, service);
     		
     			try {
-    				 String token=futureCodigo.get()+"-"+encodedEmail;
+    				 String token=futureCodigo.get()+"-"+encodedEmail.get();
             		 client.VerificarCuenta(usuario.getCorreo(),token).getBody();
             		}catch (feign.RetryableException e) {
             			if(e.getCause().getClass()==java.net.SocketTimeoutException.class) {
-            				return "Cuenta registrada, correo de verificacion enviado.";
+            				return "EmailVerificacionEnviado";
              			};
              			
-            			return "Cuenta registrada, correo de verificacion No enviado.";
+             			return "CuentaRegistrada_EmailNoEnviado";
         			}
     		}
-    		return "La cuenta ya se encuentra registrada, falta la verificacion de correo";
+    		return "FaltaVerificacion";
     	}		
-    	return "El correo electronico ya se encuentra registrado.";	
+    	return "EmailRegistrado.";	
     }
 
 
@@ -149,15 +159,15 @@ public class RegistroService {
 							if(e.getCause().getClass()==java.net.SocketTimeoutException.class) {}
 						}
             			
-            			return "Cuenta verificada";
+            			return "CuentaVerificada";
             		}
             		else{
-            			return "token caducado";
+            			return "TokenCaducado";
             			}
             		}
             	}
     		}
-    	return "token invalido";
+    	return "TokenInvalido";
     }
     
 	private boolean isvalidToken(Date date ){
@@ -177,6 +187,7 @@ public class RegistroService {
 		usuario.setId(usuarioRepository.getIdByCorreo(usuario.getCorreo()));
 		usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
 		usuario.setVerificado(false);
+		usuario.setFecha_registro(usuarioRepository.getFechaRegistrpByCorreo(usuario.getCorreo()));
 		usuario.setRoles(List.of(rolesRepository.findByNombre("ESTUDIANTE")));
 		usuario.setActivo(false);
 		return usuario;
@@ -187,6 +198,7 @@ public class RegistroService {
 				  .hashString(email+new Date().toString(), StandardCharsets.UTF_8)
 				  .toString();
 		return sha256hex;
+		
 		
 	}
     

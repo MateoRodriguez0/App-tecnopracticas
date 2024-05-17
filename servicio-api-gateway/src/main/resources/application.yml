@@ -7,14 +7,29 @@ spring:
         add-to-simple-url-handler-mapping: true
         corsConfigurations:
           '[/**]':
-            allowedOrigins: "http://127.0.0.1:5501"
-            allowedHeaders: "*" 
+            allowedOrigins: '*'
+            allowedHeaders: '*'
             allowedMethods:
               - POST
               - GET
               - OPTIONS
               - PUT 
               - DELETE
-     
+            maxAge: 30
+    
+      default-filters:
+       - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin, RETAIN_FIRST   
+  
+           
+security:
+ jwt:
+   expiration:
+    token:  20
+    refresh-token: 30
+   key: 960f9991327c16396c2de562105ab7c08b9e26c56bd4db98c31ac9df577347c297a7ba7ad16a9d42e581e54be3e014679b2185a960e619b145d07cf356ae98c0
+ 
 server:
   port: 10450
+tecnopracticas:
+  domain: '*'
+  pahts-permiteall: /auth/login,/auth/refresh,/usuarios/restablecer-clave,/usuarios/registrar,/usuarios/verificar

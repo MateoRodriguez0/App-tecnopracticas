@@ -7,15 +7,21 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="coom.tecnopracticas.app" />
+        <module name="com.tecnopracticas.usuarios" />
+        <module name="com.tecnopracticas.mensajeria" />
         <module name="usuarios" />
         <module name="api-email" />
-        <module name="coom.tecnopracticas.app" />
+        <module name="com.tecnopracticas.gateway" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-email" options="-parameters" />
+      <module name="com.tecnopracticas.gateway" options="-parameters" />
+      <module name="com.tecnopracticas.mensajeria" options="-parameters" />
+      <module name="com.tecnopracticas.usuarios" options="-parameters" />
       <module name="coom.tecnopracticas.app" options="-parameters" />
       <module name="usuarios" options="-parameters" />
     </option>

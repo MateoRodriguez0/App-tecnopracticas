@@ -44,5 +44,10 @@ public interface UsuarioRepository extends JpaRepository<Usuario, UUID> {
 	@Query(value = "update usuarios set activo=true where correo_electronico=? " ,nativeQuery =  true)
 	void habilitarUsuario(String correo );
 	
+	 @Query(value = "select c.nombre from usuarios u join carreras c on c.id=u.carrera_id"
+	 		+ " where u.id=?",
+	    		nativeQuery = true)
+	 String buscarCarreraByUsuario(UUID id);
+
 	
 }

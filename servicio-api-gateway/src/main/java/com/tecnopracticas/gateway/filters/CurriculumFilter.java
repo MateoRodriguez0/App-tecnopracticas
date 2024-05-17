@@ -22,7 +22,8 @@ public class CurriculumFilter implements GatewayFilter {
 	public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 	    String token = exchange.getRequest().getHeaders().getFirst("Authorization").split(" ")[1];
 	    String path=exchange.getRequest().getPath().value();
-	    if(path.equals("/curriculum/me")| path.equals("/usuarios/info-me")) {
+	    if(path.equals("/curriculum/me")| path.equals("/usuarios/info-me")
+	    							||path.equals("/curriculum/guardar")) {
 	    	 String id = jwtServices.getInfoToken(token).getId().toString();
 	         ServerHttpRequest request = exchange.getRequest().mutate().header("id", id).build();
 	         exchange.mutate().request(request).build();

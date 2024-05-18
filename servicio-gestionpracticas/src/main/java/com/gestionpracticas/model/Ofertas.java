@@ -33,8 +33,9 @@ public class Ofertas {
     @Column(name = "fecha_actualizacion")
     private Timestamp fecha_actualizacion;
 
-    @Column(name = "carrera_id")
-    private UUID carrera_id;
+    @ManyToOne
+    @JoinColumn(name = "carrera_id")
+    private Carreras carrera;
 
     @ManyToOne
     @JoinColumn(name = "empresa_id")

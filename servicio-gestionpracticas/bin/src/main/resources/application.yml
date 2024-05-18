@@ -23,5 +23,5 @@ spring:
       enabled: true
 
 server:
-  port: 10453
+  port: 10451
 

@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -31,5 +32,8 @@ public class Carreras {
     @ManyToOne
     @JoinColumn(name = "facultad_id")
     private Facultades facultades;
+    
+    @OneToMany(mappedBy = "carrera", fetch = FetchType.EAGER)
+    private List<Ofertas> ofertas;
 
 }

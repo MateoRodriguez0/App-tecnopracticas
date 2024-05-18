@@ -6,6 +6,8 @@ import com.gestionpracticas.repositories.OfertasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,6 +26,7 @@ public class OfertasService {
     }
 
     public Ofertas createOferta(Ofertas ofertas) {
+    	ofertas.setFecha_creacion(Timestamp.valueOf(LocalDateTime.now()));
         return ofertasRepository.save(ofertas);
     }
 
@@ -32,6 +35,7 @@ public class OfertasService {
     }
 
     public Ofertas updateOferta(Ofertas ofertas) {
+    	ofertas.setFecha_actualizacion(Timestamp.valueOf(LocalDateTime.now()));
         return ofertasRepository.save(ofertas);
     }
 

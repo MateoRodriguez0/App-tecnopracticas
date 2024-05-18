@@ -1,6 +1,9 @@
 package com.gestionpracticas.controllers;
 
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.gestionpracticas.model.Ofertas;
 import com.gestionpracticas.services.OfertasService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,8 +32,13 @@ public class OfertasController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Ofertas> createOferta(@RequestBody Ofertas ofertas) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(ofertasService.createOferta(ofertas));
+    public ResponseEntity<JsonNode> createOferta(@RequestBody Ofertas ofertas) {
+    	ofertasService.createOferta(ofertas);
+        ObjectNode node = new ObjectNode(JsonNodeFactory.instance);
+        node.put("status", "200");
+        node.put("messge", "ds");
+       
+        return ResponseEntity.status(HttpStatus.CREATED).body(node);
     }
 
     @GetMapping("/{id}")

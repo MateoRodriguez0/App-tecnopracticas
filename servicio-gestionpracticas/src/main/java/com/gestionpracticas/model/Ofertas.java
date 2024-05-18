@@ -39,6 +39,6 @@ public class Ofertas {
 
     @ManyToOne
     @JoinColumn(name = "empresa_id")
-    private Empresas empresas;
+    private Empresas empresa;
 
 }

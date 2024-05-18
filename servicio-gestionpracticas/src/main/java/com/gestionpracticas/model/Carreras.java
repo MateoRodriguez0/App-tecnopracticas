@@ -33,7 +33,7 @@ public class Carreras {
     @JoinColumn(name = "facultad_id")
     private Facultades facultades;
     
-    @OneToMany(mappedBy = "carrera", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "carrera", fetch = FetchType.LAZY)
     private List<Ofertas> ofertas;
 
 }

@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -39,5 +40,9 @@ public class Empresas {
 
     @Column(name = "fecha_registro")
     private Timestamp fecha_registro;
+    
+    @OneToMany(mappedBy = "empresa")
+    private List<Ofertas> ofertas;
+    
 
 }

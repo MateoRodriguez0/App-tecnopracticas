@@ -23,5 +23,9 @@ spring:
       enabled: true
 
 server:
+<<<<<<< HEAD
   port: 10451
+=======
+  port: 10453
+>>>>>>> a19ca288ca89986a7c55ea541e529da97054fa95
 

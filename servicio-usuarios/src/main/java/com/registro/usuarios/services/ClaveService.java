@@ -35,7 +35,7 @@ public class ClaveService {
     @Transactional
     public String RestablecerClave(RestablecerClave clave) {
     	if(!clave.getToken().matches("([a-z0-9]+)-([a-zA-Z0-9]+)==")) {
-    		return "token invalido";
+    		return "TokenInvalido";
     	}
     	
     	String [] parts= clave.getToken().split("-");
@@ -58,14 +58,14 @@ public class ClaveService {
 						if(e.getCause().getClass()==java.net.SocketTimeoutException.class) {}
 					}
         			
-        			return "clave restablecida";
+        			return "ClaveRestablecida";
         		}
         		else {
-        			return "token caducado";
+        			return "TokenCaducado";
         			}
         		}
     	}
-		return "token invalido";
+		return "TokenInvalido";
 	}
     
 	
@@ -91,15 +91,15 @@ public class ClaveService {
     			client.restablecerClave(correo,token).getBody();
 			} catch (Exception e) {
 				if(e.getCause().getClass()==java.net.SocketTimeoutException.class) {
-					return "se envio el correo de cambio de contraseña";
+					return "Enviado";
 				}
 				else {
-	    			return "No se envio el correo de cambio de contraseña";
+	    			return "NoEnviado";
 	    		}
 			}
     		
     	}
-		return "El correo elecectronico no se encuentra registrado";
+		return "NoRegistrado";
 	   }
 	 
 	

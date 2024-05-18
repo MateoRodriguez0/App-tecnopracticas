@@ -6,6 +6,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+<<<<<<< HEAD
+=======
+import java.util.List;
+>>>>>>> a19ca288ca89986a7c55ea541e529da97054fa95
 import java.util.UUID;
 
 @Entity
@@ -31,5 +35,11 @@ public class Carreras {
     @ManyToOne
     @JoinColumn(name = "facultad_id")
     private Facultades facultades;
+<<<<<<< HEAD
+=======
+    
+    @OneToMany(mappedBy = "carrera", fetch = FetchType.LAZY)
+    private List<Ofertas> ofertas;
+>>>>>>> a19ca288ca89986a7c55ea541e529da97054fa95
 
 }

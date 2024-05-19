@@ -46,6 +46,7 @@ public class CurriculumServices {
 		 }
 		String name=pathsCurriculums+"/"+id+".pdf";
 		Usuario usuario= Usuario.builder().id(id).build();
+		
 		if(!hvRepository.existsByEstudiante(usuario)) {
 			HojaVida hojaVida= HojaVida.builder().estudiante(usuario)
 					.fecha_creacion(Timestamp.from(Instant.now()))

@@ -36,3 +36,6 @@ tecnopracticas:
    cvs: curriculums
    ruta_cv: ${gcs-resource-test-bucket}/${tecnopracticas.paths.cvs}
 gcs-resource-test-bucket: tecnopracticas-resources
+
+server:
+  port: 10451

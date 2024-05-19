@@ -1,8 +1,13 @@
 package com.gestionpracticas.controllers;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.gestionpracticas.model.Empresas;
 import com.gestionpracticas.services.EmpresasService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,6 +16,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/empresas")
 public class EmpresasController {
+
     @Autowired
     private EmpresasService empresasService;
 
@@ -20,22 +26,46 @@ public class EmpresasController {
     }
 
     @GetMapping("/{id}")
-    public Empresas getEmpresaById(@PathVariable UUID id) {
-        return empresasService.getEmpresaById(id);
-    }
+    public Empresas getEmpresaById(@PathVariable UUID id) {return empresasService.getEmpresaById(id);}
 
     @PostMapping("/create")
-    public Empresas createEmpresa(@RequestBody Empresas empresas) {
-        return empresasService.createEmpresa(empresas);
+    public ResponseEntity<JsonNode> createEmpresa(@RequestBody Empresas empresas) {
+        Empresas nuevaEmpresa = empresasService.createEmpresa(empresas);
+
+        ObjectNode responseNode = new ObjectNode(JsonNodeFactory.instance);
+        responseNode.put("status", "200");
+        responseNode.put("message", "EMPRESA_CREADA");
+        responseNode.put("body", JsonNodeFactory.instance.pojoNode(nuevaEmpresa));
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseNode);
     }
 
     @PutMapping("/update/{id}")
-    public Empresas updateEmpresa(@PathVariable UUID id, @RequestBody Empresas empresas) {
-        return empresasService.updateEmpresa(id, empresas);
+    @ResponseBody
+    public ResponseEntity<JsonNode> updateEmpresa(@PathVariable UUID id, @RequestBody Empresas empresas) {
+        Empresas empresaActualizada = empresasService.updateEmpresa(id, empresas);
+
+        ObjectNode responseNode = new ObjectNode(JsonNodeFactory.instance);
+        responseNode.put("status", "200");
+        responseNode.put("message", "EMPRESA_ACTUALIZADA");
+        responseNode.put("body", JsonNodeFactory.instance.pojoNode(empresaActualizada));
+
+        return ResponseEntity.ok(responseNode);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteEmpresa(@PathVariable UUID id) {
-        empresasService.deleteEmpresa(id);
+    public ResponseEntity<JsonNode> deleteEmpresa(@PathVariable UUID id) {
+        try {
+            empresasService.deleteEmpresa(id);
+            ObjectNode node = JsonNodeFactory.instance.objectNode();
+            node.put("status", "200");
+            node.put("message", "EMPRESA_ELIMINADA");
+            return ResponseEntity.ok().body(node);
+        } catch (Exception e) {
+            ObjectNode errorNode = JsonNodeFactory.instance.objectNode();
+            errorNode.put("status", "200");
+            errorNode.put("message", "ERROR_NO_SE_PUEDE_ELIMINAR");
+            return ResponseEntity.status(200).body(errorNode);
+        }
     }
 }

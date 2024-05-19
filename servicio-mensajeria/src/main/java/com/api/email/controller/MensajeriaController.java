@@ -64,8 +64,7 @@ public class MensajeriaController {
 		}
 		return ResponseEntity.ok(false);
 	}
-	
-	
+
 	@PostMapping(value = "/postulaciones/rechazada")
 	public ResponseEntity<Boolean> postulacionRechazada(@RequestBody Postulacion postulacion) {
 		return ResponseEntity.ok(postulaciones.PostulacionRechazada(postulacion));

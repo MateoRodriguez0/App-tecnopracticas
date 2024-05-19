@@ -1,5 +1,6 @@
 package com.gestionpracticas.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,10 +34,12 @@ public class Ofertas {
     @Column(name = "fecha_actualizacion")
     private Timestamp fecha_actualizacion;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "carrera_id")
     private Carreras carrera;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "empresa_id")
     private Empresas empresa;

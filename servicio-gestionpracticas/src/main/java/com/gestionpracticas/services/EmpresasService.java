@@ -24,7 +24,7 @@ public class EmpresasService {
     }
 
     public Empresas createEmpresa(Empresas empresa) {
-    	empresa.setFecha_registro(Timestamp.from(Instant.now()));
+        empresa.setFecha_registro(Timestamp.from(Instant.now()));
         return empresasRepository.save(empresa);
     }
 

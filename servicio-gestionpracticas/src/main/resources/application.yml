@@ -24,4 +24,3 @@ spring:
 
 server:
   port: 10453
-

@@ -52,7 +52,6 @@ public class AccountService {
 		   codeRepository.delete(verificationCode);
 		  }
 	}
-	
 
 	public boolean SeCambioLaClave(String email) {
 		String cuerpo= plantillasService

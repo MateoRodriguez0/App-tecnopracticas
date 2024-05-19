@@ -17,11 +17,11 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 public class Empresas {
-	
-	public Empresas(UUID id) {
-		this.id=id;
-	}
-	
+
+    public Empresas(UUID id) {
+        this.id=id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -40,9 +40,9 @@ public class Empresas {
 
     @Column(name = "fecha_registro")
     private Timestamp fecha_registro;
-    
+
     @OneToMany(mappedBy = "empresa")
     private List<Ofertas> ofertas;
-    
+
 
 }

@@ -13,7 +13,7 @@ spring:
               - POST
               - GET
               - OPTIONS
-              - PUT 
+              - PUT
               - DELETE
             maxAge: 30
     

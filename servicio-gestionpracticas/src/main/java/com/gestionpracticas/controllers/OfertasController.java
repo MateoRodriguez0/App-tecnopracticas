@@ -1,24 +1,18 @@
 package com.gestionpracticas.controllers;
 
-
-<<<<<<< HEAD
-=======
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
->>>>>>> a19ca288ca89986a7c55ea541e529da97054fa95
+import com.gestionpracticas.model.Carreras;
+import com.gestionpracticas.model.Empresas;
 import com.gestionpracticas.model.Ofertas;
+import com.gestionpracticas.repositories.OfertasRepository;
 import com.gestionpracticas.services.OfertasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-<<<<<<< HEAD
-=======
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
->>>>>>> a19ca288ca89986a7c55ea541e529da97054fa95
 import java.util.List;
 import java.util.UUID;
 
@@ -27,9 +21,12 @@ import java.util.UUID;
 public class OfertasController {
     private final OfertasService ofertasService;
 
+    private final OfertasRepository ofertasRepository;
+
     @Autowired
-    public OfertasController(OfertasService ofertasService) {
+    public OfertasController(OfertasService ofertasService, OfertasRepository ofertasRepository) {
         this.ofertasService = ofertasService;
+        this.ofertasRepository = ofertasRepository;
     }
 
     @GetMapping
@@ -37,38 +34,50 @@ public class OfertasController {
         return ResponseEntity.ok(ofertasService.getAllOfertas());
     }
 
-    @PostMapping("/create")
-<<<<<<< HEAD
-    public ResponseEntity<Ofertas> createOferta(@RequestBody Ofertas ofertas) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(ofertasService.createOferta(ofertas));
-=======
-    public ResponseEntity<JsonNode> createOferta(@RequestBody Ofertas ofertas) {
-    	ofertasService.createOferta(ofertas);
-        ObjectNode node = new ObjectNode(JsonNodeFactory.instance);
-        node.put("status", "200");
-        node.put("messge", "ds");
-       
-        return ResponseEntity.status(HttpStatus.CREATED).body(node);
->>>>>>> a19ca288ca89986a7c55ea541e529da97054fa95
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Ofertas> getOferta(@PathVariable UUID id) {
+    @GetMapping("/{id}") public ResponseEntity<Ofertas> getOferta(@PathVariable UUID id) {
         return ResponseEntity.ok(ofertasService.getOferta(id));
     }
 
+    @PostMapping("/create")
+    public ResponseEntity<JsonNode> createOferta(@RequestBody Ofertas ofertas) {
+        ofertasService.createOferta(ofertas);
+        ObjectNode node = new ObjectNode(JsonNodeFactory.instance);
+        node.put("status", "201");
+        node.put("message", "OFERTA_CREADA_EXITOSAMENTE");
+        return ResponseEntity.status(HttpStatus.CREATED).body(node);
+    }
+
     @PutMapping("/update/{id}")
-    public ResponseEntity<Ofertas> updateOferta(@PathVariable UUID id, @RequestBody Ofertas ofertas) {
-        return ResponseEntity.ok(ofertasService.updateOferta(ofertas));
+    public ResponseEntity<JsonNode> updateOferta(@PathVariable UUID id, @RequestBody Ofertas ofertas) {
+        ObjectNode node = new ObjectNode(JsonNodeFactory.instance);
+        node.put("status", "200");
+        node.put("message", "OFERTA_ACTUALIZADA");
+        return ResponseEntity.ok(node);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteOferta(@PathVariable UUID id) {
-        ofertasService.deleteOferta(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<JsonNode> deleteOferta(@PathVariable UUID id) {
+        try {
+            ofertasService.deleteOferta(id);
+            ObjectNode node = JsonNodeFactory.instance.objectNode();
+            node.put("status", "200");
+            node.put("message", "OFERTA_ELIMINADA");
+            return ResponseEntity.ok().body(node);
+        } catch (Exception e) {
+            ObjectNode errorNode = JsonNodeFactory.instance.objectNode();
+            errorNode.put("status", "200");
+            errorNode.put("message", "ERROR_NO_SE_PUEDE_ELIMINAR");
+            return ResponseEntity.status(200).body(errorNode);
+        }
     }
-    @GetMapping("/carreras/{carreraId}")
-    public ResponseEntity<List<Ofertas>> getOfertasByCarrera(@PathVariable UUID id) {
-        return ResponseEntity.ok(ofertasService.getOfertasByCarrera(id));
+
+    @GetMapping("/empresa/{id}")
+    public List<Ofertas> getOfertasByEmpresa(@PathVariable UUID id) {
+        return ofertasService.getOfertasByEmpresas(id);
+    }
+
+    @GetMapping("/carrera/{id}")
+    public List<Ofertas> getOfertasByCarrera(@PathVariable UUID id) {
+        return ofertasService.getOfertasByCarreras(id);
     }
 }

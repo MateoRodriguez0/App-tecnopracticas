@@ -1,23 +1,30 @@
 package com.gestionpracticas.services;
 
 
+import com.gestionpracticas.model.Carreras;
+import com.gestionpracticas.model.Empresas;
 import com.gestionpracticas.model.Ofertas;
+import com.gestionpracticas.repositories.CarrerasRepository;
+import com.gestionpracticas.repositories.EmpresasRepository;
 import com.gestionpracticas.repositories.OfertasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD
-=======
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
->>>>>>> a19ca288ca89986a7c55ea541e529da97054fa95
 import java.util.List;
 import java.util.UUID;
 
 
 @Service
 public class OfertasService {
+    @Autowired
     private final OfertasRepository ofertasRepository;
+    @Autowired
+    private CarrerasRepository carrerasRepository;
+    @Autowired
+    private EmpresasRepository empresasRepository;
+
 
     @Autowired
     public OfertasService(OfertasRepository ofertasRepository) {
@@ -29,10 +36,7 @@ public class OfertasService {
     }
 
     public Ofertas createOferta(Ofertas ofertas) {
-<<<<<<< HEAD
-=======
-    	ofertas.setFecha_creacion(Timestamp.valueOf(LocalDateTime.now()));
->>>>>>> a19ca288ca89986a7c55ea541e529da97054fa95
+        ofertas.setFecha_creacion(Timestamp.valueOf(LocalDateTime.now()));
         return ofertasRepository.save(ofertas);
     }
 
@@ -41,10 +45,7 @@ public class OfertasService {
     }
 
     public Ofertas updateOferta(Ofertas ofertas) {
-<<<<<<< HEAD
-=======
-    	ofertas.setFecha_actualizacion(Timestamp.valueOf(LocalDateTime.now()));
->>>>>>> a19ca288ca89986a7c55ea541e529da97054fa95
+        ofertas.setFecha_actualizacion(Timestamp.valueOf(LocalDateTime.now()));
         return ofertasRepository.save(ofertas);
     }
 
@@ -52,10 +53,14 @@ public class OfertasService {
         ofertasRepository.deleteById(id);
     }
 
-    //listar ofertas por carrera
-    public List<Ofertas> getOfertasByCarrera(UUID id) {
-        return ofertasRepository.findByCarreraId(id);
+    public List<Ofertas> getOfertasByEmpresas(UUID id) {
+        Empresas empresa = empresasRepository.findById(id).orElseThrow();
+        return ofertasRepository.findByEmpresa(empresa);
     }
 
+    public List<Ofertas> getOfertasByCarreras(UUID id) {
+        Carreras carrera = carrerasRepository.findById(id).orElseThrow();
+        return ofertasRepository.findByCarrera(carrera);
+    }
 
 }

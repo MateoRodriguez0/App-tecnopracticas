@@ -5,11 +5,8 @@ import com.gestionpracticas.repositories.EmpresasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD
-=======
 import java.sql.Timestamp;
 import java.time.Instant;
->>>>>>> a19ca288ca89986a7c55ea541e529da97054fa95
 import java.util.List;
 import java.util.UUID;
 
@@ -27,10 +24,7 @@ public class EmpresasService {
     }
 
     public Empresas createEmpresa(Empresas empresa) {
-<<<<<<< HEAD
-=======
-    	empresa.setFecha_registro(Timestamp.from(Instant.now()));
->>>>>>> a19ca288ca89986a7c55ea541e529da97054fa95
+        empresa.setFecha_registro(Timestamp.from(Instant.now()));
         return empresasRepository.save(empresa);
     }
 

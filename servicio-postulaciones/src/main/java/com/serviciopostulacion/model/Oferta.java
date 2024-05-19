@@ -16,7 +16,13 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 public class Oferta {
-    @Id
+	
+    public Oferta(UUID id) {
+		super();
+		this.id = id;
+	}
+
+	@Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 

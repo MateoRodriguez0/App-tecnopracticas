@@ -27,8 +27,8 @@ public class Empresa {
     @Column(name = "telefono")
     private String telefono;
 
-    @Column(name = "dirrecion")
-    private String dirrecion;
+    @Column(name = "direccion")
+    private String direccion;
 
     @Column(name = "email")
     private String email;

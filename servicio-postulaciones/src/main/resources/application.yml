@@ -8,7 +8,7 @@ spring:
       client:
         config:
           mensajeriaClient:
-            read-timeout: 600
+            read-timeout: 100
   jpa:
     generate-ddl: false
     open-in-view: true
@@ -23,5 +23,5 @@ spring:
       enabled: true
 
 server:
-  port: 10451
+  port: 10452
 

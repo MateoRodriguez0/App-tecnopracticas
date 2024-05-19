@@ -17,7 +17,12 @@ import java.util.UUID;
 @Builder
 public class Usuario {
 
-    @Id
+    public Usuario(UUID id) {
+		super();
+		this.id = id;
+	}
+
+	@Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 

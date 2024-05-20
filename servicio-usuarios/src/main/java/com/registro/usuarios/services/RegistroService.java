@@ -22,6 +22,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -180,11 +181,13 @@ public class RegistroService {
 		usuario.setVerificado(false);
 		usuario.setActivo(false);
 		usuario.setRoles(List.of(rolesRepository.findByNombre("ESTUDIANTE")));
+		usuario.setCarrera_id(UUID.fromString(usuario.getCarrera()));
 		return usuario;
 	}
 	
 	private Usuario usuarioRegistroExistente(Usuario usuario){
 		usuario.setId(usuarioRepository.getIdByCorreo(usuario.getCorreo()));
+		usuario.setCarrera_id(UUID.fromString(usuario.getCarrera()));
 		usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
 		usuario.setVerificado(false);
 		usuario.setFecha_registro(usuarioRepository.getFechaRegistrpByCorreo(usuario.getCorreo()));

@@ -74,6 +74,7 @@ public class AuthenticationServiceImpl {
 	                            .user_id(usuario.getId())
 	                            .refreshToken(refreshToken)
 	                            .expires_in(60 * 20)
+	                            .scope(usuario.getRoles().stream().map(r -> r.getNombre()).findFirst().get().substring(0,2))
 	                            .build());
 	                } 
 	       

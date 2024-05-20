@@ -20,7 +20,7 @@ public class EmpresasService {
     }
 
     public Empresas getEmpresaById(UUID id) {
-        return empresasRepository.findById(id).orElseThrow();
+        return empresasRepository.findById(id).orElse(null);
     }
 
     public Empresas createEmpresa(Empresas empresa) {

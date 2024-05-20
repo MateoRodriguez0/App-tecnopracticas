@@ -4,6 +4,7 @@ package com.serviciopostulacion.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import com.serviciopostulacion.model.Empresa;
 import com.serviciopostulacion.model.Oferta;
 
 import java.util.List;
@@ -26,5 +27,7 @@ public interface OfertasRepository extends JpaRepository<Oferta, UUID> {
 	@Query(value = "SELECT o.carrera_id from ofertas o where o.id= ?",nativeQuery = true)
 	UUID getIdCarreraByOferta(UUID id );
 	
+	List<Oferta> findByEmpresa(Empresa empresa);
 	
+	List<Oferta> findByCarrera(UUID carrera);
 }

@@ -30,6 +30,16 @@ public class Postulacion {
 
     @Column(name = "fecha_postulacion")
     private Timestamp fecha_postulacion;
+    
+    @Column(name = "fecha_revision")
+    private Timestamp fecha_revision;
+    
+    @Column(name = "fecha_descartada")
+    private Timestamp fecha_descartada;
+
+    @Column(name = "fecha_aprobada")
+    private Timestamp fecha_aprobada;
+
 
 	@JdbcTypeCode(SqlTypes.NAMED_ENUM)
 	@Basic(optional = false)

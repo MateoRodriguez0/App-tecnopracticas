@@ -4,8 +4,6 @@ package com.gestionpracticas.services;
 import com.gestionpracticas.model.Carreras;
 import com.gestionpracticas.model.Empresas;
 import com.gestionpracticas.model.Ofertas;
-import com.gestionpracticas.repositories.CarrerasRepository;
-import com.gestionpracticas.repositories.EmpresasRepository;
 import com.gestionpracticas.repositories.OfertasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,30 +16,22 @@ import java.util.UUID;
 
 @Service
 public class OfertasService {
+	
     @Autowired
-    private final OfertasRepository ofertasRepository;
-    @Autowired
-    private CarrerasRepository carrerasRepository;
-    @Autowired
-    private EmpresasRepository empresasRepository;
-
-
-    @Autowired
-    public OfertasService(OfertasRepository ofertasRepository) {
-        this.ofertasRepository = ofertasRepository;
-    }
+    private OfertasRepository ofertasRepository;
 
     public List<Ofertas> getAllOfertas() {
         return ofertasRepository.findAll();
     }
 
-    public Ofertas createOferta(Ofertas ofertas) {
+    public Ofertas createOferta(Ofertas ofertas,UUID id) {
+    	ofertas.setPublicado_por(id);
         ofertas.setFecha_creacion(Timestamp.valueOf(LocalDateTime.now()));
         return ofertasRepository.save(ofertas);
     }
 
     public Ofertas getOferta(UUID id) {
-        return ofertasRepository.findById(id).orElseThrow();
+        return ofertasRepository.findById(id).orElse(null);
     }
 
     public Ofertas updateOferta(Ofertas ofertas) {
@@ -54,12 +44,12 @@ public class OfertasService {
     }
 
     public List<Ofertas> getOfertasByEmpresas(UUID id) {
-        Empresas empresa = empresasRepository.findById(id).orElseThrow();
+        Empresas empresa = new Empresas(id);
         return ofertasRepository.findByEmpresa(empresa);
     }
 
     public List<Ofertas> getOfertasByCarreras(UUID id) {
-        Carreras carrera = carrerasRepository.findById(id).orElseThrow();
+        Carreras carrera = new Carreras(id);
         return ofertasRepository.findByCarrera(carrera);
     }
 

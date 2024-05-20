@@ -26,7 +26,9 @@ public class EmpresasController {
     }
 
     @GetMapping("/{id}")
-    public Empresas getEmpresaById(@PathVariable UUID id) {return empresasService.getEmpresaById(id);}
+    public Empresas getEmpresaById(@PathVariable UUID id) {
+    	return empresasService.getEmpresaById(id);
+    	}
 
     @PostMapping("/create")
     public ResponseEntity<JsonNode> createEmpresa(@RequestBody Empresas empresas) {
@@ -35,20 +37,19 @@ public class EmpresasController {
         ObjectNode responseNode = new ObjectNode(JsonNodeFactory.instance);
         responseNode.put("status", "200");
         responseNode.put("message", "EMPRESA_CREADA");
-        responseNode.put("body", JsonNodeFactory.instance.pojoNode(nuevaEmpresa));
+        responseNode.putPOJO("body", nuevaEmpresa);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(responseNode);
     }
 
     @PutMapping("/update/{id}")
-    @ResponseBody
     public ResponseEntity<JsonNode> updateEmpresa(@PathVariable UUID id, @RequestBody Empresas empresas) {
         Empresas empresaActualizada = empresasService.updateEmpresa(id, empresas);
 
         ObjectNode responseNode = new ObjectNode(JsonNodeFactory.instance);
         responseNode.put("status", "200");
         responseNode.put("message", "EMPRESA_ACTUALIZADA");
-        responseNode.put("body", JsonNodeFactory.instance.pojoNode(empresaActualizada));
+        responseNode.putPOJO("body", empresaActualizada);
 
         return ResponseEntity.ok(responseNode);
     }

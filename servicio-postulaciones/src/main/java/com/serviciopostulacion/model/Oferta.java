@@ -7,7 +7,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "ofertas")
@@ -44,6 +47,10 @@ public class Oferta {
     @ManyToOne
     @JoinColumn(name = "empresa_id")
     private Empresa empresa;
+    
+    @JsonIgnore
+    @OneToMany(mappedBy ="oferta", fetch = FetchType.LAZY)
+    private List<Postulacion> postulaciones;
 
 }
 

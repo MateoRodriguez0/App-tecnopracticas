@@ -9,31 +9,39 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 import java.util.UUID;
 
-    @Entity
-    @Table(name = "carreras")
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Builder
-    public class Carreras {
-        @Id
-        @GeneratedValue(strategy = GenerationType.UUID)
-        private UUID id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-        @Column(name = "nombre")
-        private String nombre;
+@Entity
+@Table(name = "carreras")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class Carreras {
 
-        @Column(name = "url_imagen")
-        private String url_imagen;
+	public Carreras(UUID id) {
+		this.id = id;
+	}
 
-        @Column(name = "descripcion")
-        private String descripcion;
+	@Id
+	@GeneratedValue(strategy = GenerationType.UUID)
+	private UUID id;
 
-        @ManyToOne
-        @JoinColumn(name = "facultad_id")
-        private Facultades facultades;
+	@Column(name = "nombre")
+	private String nombre;
 
-        @OneToMany(mappedBy = "carrera", fetch = FetchType.LAZY)
-        private List<Ofertas> ofertas;
+	@Column(name = "url_imagen")
+	private String url_imagen;
 
-    }
+	@Column(name = "descripcion")
+	private String descripcion;
+	
+	@ManyToOne
+	@JoinColumn(name = "facultad_id")
+	private Facultades facultad;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "carrera", fetch = FetchType.LAZY)
+	private List<Ofertas> ofertas;
+
+}

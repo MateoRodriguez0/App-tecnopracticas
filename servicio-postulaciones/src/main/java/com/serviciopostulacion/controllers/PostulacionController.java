@@ -2,7 +2,6 @@ package com.serviciopostulacion.controllers;
 
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.serviciopostulacion.model.EstadoPostulacion;
 import com.serviciopostulacion.model.Oferta;
 import com.serviciopostulacion.model.Postulacion;
 import com.serviciopostulacion.services.PostulacionService;
@@ -30,10 +29,20 @@ public class PostulacionController {
     public Postulacion obtenerPostulacionPorId(@PathVariable UUID id) {
         return postulacionService.obtenerPostulacionPorId(id);
     }
+    
+    @GetMapping("/empresa/{id}")
+    public List<Postulacion> obtenerPostulacionPorEmpresa(@PathVariable UUID id) {
+        return postulacionService.obtenerPostulacionesPorEmpresa(id);
+    }
+    
+    @GetMapping("/carrera/{id}")
+    public List<Postulacion> obtenerPostulacionPorCarrera(@PathVariable UUID id) {
+        return postulacionService.obtenerPostulacionesPorCarrera(id);
+    }
 
     //Recibir el id del usuario que se postula, por cabecera
     @PostMapping("/crear")
-    public ResponseEntity<?> postularse(@RequestHeader("Id") UUID Id, @RequestBody Oferta oferta) {
+    public ResponseEntity<?> postularse(@RequestHeader("id") UUID Id, @RequestBody Oferta oferta) {
     	ObjectNode node = new ObjectNode(JsonNodeFactory.instance);
         node.put("status", "200");
         node.put("message", postulacionService.crearPostulacion(Id,oferta));
@@ -41,7 +50,8 @@ public class PostulacionController {
     }
 
     @PutMapping("/{id}")
-    public Postulacion actualizarPostulacion(@PathVariable UUID id, @RequestBody Postulacion postulacion) {
+    public Postulacion actualizarPostulacion(@PathVariable UUID id, 
+    			@RequestBody Postulacion postulacion) {
         postulacion.setId(id);
         return postulacionService.actualizarPostulacion(postulacion);
     }
@@ -52,22 +62,32 @@ public class PostulacionController {
     }
 
     @PutMapping("/{id}/aprobar")
-    public Postulacion aprobarPostulacion(@PathVariable UUID id) {
-        return postulacionService.aprobarPostulacion(id);
+    public ResponseEntity<?> aprobarPostulacion(@PathVariable UUID id) {
+    	ObjectNode node = new ObjectNode(JsonNodeFactory.instance);
+        node.put("status", "200");
+        node.put("message", postulacionService.aprobarPostulacion(id));
+        return ResponseEntity.status(HttpStatus.OK).body(node);
     }
 
-    @PutMapping("/{id}/rechazar")
-    public Postulacion rechazarPostulacion(@PathVariable UUID id) {
-        return postulacionService.rechazarPostulacion(id);
+    @PutMapping("/{id}/descartar")
+    public ResponseEntity<?> rechazarPostulacion(@PathVariable UUID id) {
+    	ObjectNode node = new ObjectNode(JsonNodeFactory.instance);
+        node.put("status", "200");
+        node.put("message", postulacionService.rechazarPostulacion(id));
+        return ResponseEntity.status(HttpStatus.OK).body(node);
+      
     }
 
-    @PutMapping("/{id}/cambiar-estado")
-    public Postulacion cambiarEstadoPostulacion(@PathVariable UUID id, @RequestBody EstadoPostulacion estado) {
-        return postulacionService.cambiarEstadoPostulacion(id, estado);
+    @PutMapping("/{id}/revision")
+    public ResponseEntity<?> cambiarEstadoPostulacion(@PathVariable UUID id) {
+    	ObjectNode node = new ObjectNode(JsonNodeFactory.instance);
+        node.put("status", "200");
+        node.put("message", postulacionService.RevisarPostulacion(id));
+        return ResponseEntity.status(HttpStatus.OK).body(node);
     }
 
-    @GetMapping("/usuario/{usuarioId}")
-    public Optional<Postulacion> getPostulacionesByUsuarioId(@PathVariable UUID Id) {
+    @GetMapping("/usuario/{id}")
+    public Optional<Postulacion> getPostulacionesByUsuarioId(@PathVariable(name = "id") UUID Id) {
         return postulacionService.getPostulacionesById(Id);
     }
 

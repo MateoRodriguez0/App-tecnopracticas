@@ -19,5 +19,6 @@ public class AuthenticationResponse {
 	private String token;
 	private int expires_in;
 	private UUID user_id;
+	private String scope;
 	private String refreshToken;
 }

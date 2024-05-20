@@ -221,7 +221,7 @@ public class PlantillaServiceImpl implements PlantillasService {
 				+ "        ha sido revisada y aprobada.\r\n"
 				+ "      </p>\r\n"
 				+ "      <p>\r\n"
-				+ "        Felicidades, ¡has sido seleccionado/a para avanzar en el proceso de selección! Tu\r\n"
+				+ "        Felicidades!, has sido seleccionado/a para avanzar en el proceso de selección! Tu\r\n"
 				+ "        experiencia y habilidades destacaron entre los demás\r\n"
 				+ "        candidatos, y creemos firmemente que contribuirás de manera\r\n"
 				+ "        significativa a nuestro equipo.\r\n"

@@ -3,10 +3,8 @@ package com.gestionpracticas.controllers;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.gestionpracticas.model.Carreras;
-import com.gestionpracticas.model.Empresas;
+
 import com.gestionpracticas.model.Ofertas;
-import com.gestionpracticas.repositories.OfertasRepository;
 import com.gestionpracticas.services.OfertasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,28 +17,23 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/ofertas")
 public class OfertasController {
-    private final OfertasService ofertasService;
-
-    private final OfertasRepository ofertasRepository;
-
-    @Autowired
-    public OfertasController(OfertasService ofertasService, OfertasRepository ofertasRepository) {
-        this.ofertasService = ofertasService;
-        this.ofertasRepository = ofertasRepository;
-    }
+	
+	@Autowired
+    private  OfertasService ofertasService;
 
     @GetMapping
     public ResponseEntity<List<Ofertas>> getAllOfertas() {
         return ResponseEntity.ok(ofertasService.getAllOfertas());
     }
 
-    @GetMapping("/{id}") public ResponseEntity<Ofertas> getOferta(@PathVariable UUID id) {
+    @GetMapping("/{id}") 
+    public ResponseEntity<Ofertas> getOferta(@PathVariable UUID id) {
         return ResponseEntity.ok(ofertasService.getOferta(id));
     }
 
     @PostMapping("/create")
-    public ResponseEntity<JsonNode> createOferta(@RequestBody Ofertas ofertas) {
-        ofertasService.createOferta(ofertas);
+    public ResponseEntity<JsonNode> createOferta(@RequestBody Ofertas ofertas, @RequestHeader UUID id) {
+        ofertasService.createOferta(ofertas,id);
         ObjectNode node = new ObjectNode(JsonNodeFactory.instance);
         node.put("status", "201");
         node.put("message", "OFERTA_CREADA_EXITOSAMENTE");
@@ -49,6 +42,7 @@ public class OfertasController {
 
     @PutMapping("/update/{id}")
     public ResponseEntity<JsonNode> updateOferta(@PathVariable UUID id, @RequestBody Ofertas ofertas) {
+    	ofertasService.updateOferta(ofertas);
         ObjectNode node = new ObjectNode(JsonNodeFactory.instance);
         node.put("status", "200");
         node.put("message", "OFERTA_ACTUALIZADA");

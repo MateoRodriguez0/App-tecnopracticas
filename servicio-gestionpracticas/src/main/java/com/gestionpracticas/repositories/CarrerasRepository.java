@@ -1,7 +1,6 @@
 package com.gestionpracticas.repositories;
 
 import com.gestionpracticas.model.Carreras;
-import com.gestionpracticas.model.Ofertas;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

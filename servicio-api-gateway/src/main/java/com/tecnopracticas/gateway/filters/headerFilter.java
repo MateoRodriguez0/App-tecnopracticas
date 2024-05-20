@@ -9,10 +9,10 @@ import  com.tecnopracticas.gateway.security.jwtServices;
 import reactor.core.publisher.Mono;
 
 @Component
-public class CurriculumFilter implements GatewayFilter {
+public class headerFilter implements GatewayFilter {
 	private  jwtServices jwtServices;
 	
-	public CurriculumFilter(jwtServices jwtServices) {
+	public headerFilter(jwtServices jwtServices) {
 		super();
 		this.jwtServices = jwtServices;
 	}
@@ -22,8 +22,10 @@ public class CurriculumFilter implements GatewayFilter {
 	public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 	    String token = exchange.getRequest().getHeaders().getFirst("Authorization").split(" ")[1];
 	    String path=exchange.getRequest().getPath().value();
-	    if(path.equals("/curriculum/me")| path.equals("/usuarios/info-me")
-	    							||path.equals("/curriculum/guardar")) {
+	    if(path.startsWith("/curriculum")|| path.equals("/usuarios/info-me")
+	    		    ||path.startsWith("/postulaciones")
+	    			||path.startsWith("/carreras")||path.startsWith("/ofertas")
+	    			||path.startsWith("/empresas")||path.startsWith("/facultades")) {
 	    	 String id = jwtServices.getInfoToken(token).getId().toString();
 	         ServerHttpRequest request = exchange.getRequest().mutate().header("id", id).build();
 	         exchange.mutate().request(request).build();

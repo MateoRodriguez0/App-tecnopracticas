@@ -10,6 +10,8 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "empresas")
 @Data
@@ -41,6 +43,7 @@ public class Empresas {
     @Column(name = "fecha_registro")
     private Timestamp fecha_registro;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "empresa")
     private List<Ofertas> ofertas;
 

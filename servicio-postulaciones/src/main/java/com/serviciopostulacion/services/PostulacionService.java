@@ -1,6 +1,7 @@
 package com.serviciopostulacion.services;
 
 import com.serviciopostulacion.clients.MensajeriaClient;
+import com.serviciopostulacion.model.Carreras;
 import com.serviciopostulacion.model.Empresa;
 import com.serviciopostulacion.model.EstadoPostulacion;
 import com.serviciopostulacion.model.Oferta;
@@ -54,7 +55,8 @@ public class PostulacionService {
 	}
 
 	public List<Postulacion> obtenerPostulacionesPorCarrera(UUID id) {
-		return ofertasRepository.findByCarrera(id).stream().map(o -> o.getPostulaciones()).flatMap(p -> p.stream())
+		return ofertasRepository.findByCarrera(new Carreras(id))
+				.stream().map(o -> o.getPostulaciones()).flatMap(p -> p.stream())
 				.toList();
 	}
 

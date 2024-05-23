@@ -34,8 +34,12 @@ public class OfertasService {
         return ofertasRepository.findById(id).orElse(null);
     }
 
-    public Ofertas updateOferta(Ofertas ofertas) {
-        ofertas.setFecha_actualizacion(Timestamp.valueOf(LocalDateTime.now()));
+    public Ofertas updateOferta(Ofertas ofertas,UUID id) {
+    	Ofertas oferta= ofertasRepository.findById(id).orElse(null);
+    	oferta.setDescripcion(ofertas.getDescripcion());
+    	oferta.setEmpresa(ofertas.getEmpresa());
+    	oferta.setCarrera(ofertas.getCarrera());
+    	ofertas.setFecha_actualizacion(Timestamp.valueOf(LocalDateTime.now()));
         return ofertasRepository.save(ofertas);
     }
 

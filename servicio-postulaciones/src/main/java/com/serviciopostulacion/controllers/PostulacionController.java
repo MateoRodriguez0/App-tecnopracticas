@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -86,8 +85,8 @@ public class PostulacionController {
         return ResponseEntity.status(HttpStatus.OK).body(node);
     }
 
-    @GetMapping("/usuario/{id}")
-    public Optional<Postulacion> getPostulacionesByUsuarioId(@PathVariable(name = "id") UUID Id) {
+    @GetMapping("/me")
+    public List<Postulacion> getPostulacionesByUsuarioId(@RequestHeader(name = "id") UUID Id) {
         return postulacionService.getPostulacionesById(Id);
     }
 

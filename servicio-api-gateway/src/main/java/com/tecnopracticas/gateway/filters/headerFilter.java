@@ -20,12 +20,12 @@ public class headerFilter implements GatewayFilter {
 	
 	@Override
 	public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-	    String token = exchange.getRequest().getHeaders().getFirst("Authorization").split(" ")[1];
 	    String path=exchange.getRequest().getPath().value();
-	    if(path.startsWith("/curriculum")|| path.equals("/usuarios/info-me")
+	    if(path.startsWith("/curriculum")|| path.equals("/info-me")
 	    		    ||path.startsWith("/postulaciones")
-	    			||path.startsWith("/carreras")||path.startsWith("/ofertas")
+	    			||path.startsWith("/carreras/")||path.startsWith("/ofertas")
 	    			||path.startsWith("/empresas")||path.startsWith("/facultades")) {
+	    	 String token = exchange.getRequest().getHeaders().getFirst("Authorization").split(" ")[1];
 	    	 String id = jwtServices.getInfoToken(token).getId().toString();
 	         ServerHttpRequest request = exchange.getRequest().mutate().header("id", id).build();
 	         exchange.mutate().request(request).build();

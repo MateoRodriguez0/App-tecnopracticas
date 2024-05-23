@@ -32,7 +32,7 @@ public class OfertasController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<JsonNode> createOferta(@RequestBody Ofertas ofertas, @RequestHeader UUID id) {
+    public ResponseEntity<JsonNode> createOferta(@RequestBody Ofertas ofertas, @RequestHeader(name = "id") UUID id) {
         ofertasService.createOferta(ofertas,id);
         ObjectNode node = new ObjectNode(JsonNodeFactory.instance);
         node.put("status", "201");
@@ -42,7 +42,7 @@ public class OfertasController {
 
     @PutMapping("/update/{id}")
     public ResponseEntity<JsonNode> updateOferta(@PathVariable UUID id, @RequestBody Ofertas ofertas) {
-    	ofertasService.updateOferta(ofertas);
+    	ofertasService.updateOferta(ofertas,id);
         ObjectNode node = new ObjectNode(JsonNodeFactory.instance);
         node.put("status", "200");
         node.put("message", "OFERTA_ACTUALIZADA");

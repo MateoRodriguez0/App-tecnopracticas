@@ -31,14 +31,16 @@ public class RouteTecnopracticas {
 					.and()
 					.method(HttpMethod.GET,HttpMethod.POST,HttpMethod.PUT, HttpMethod.OPTIONS)
 					.filters(f ->
-						f.filter(new headerFilter(jwtServices)))
+						f.stripPrefix(1)
+						.filter(new headerFilter(jwtServices)))
 					.uri("http://localhost:10451"))
 				.route("informacion",p ->
 				p.path("/usuarios/info-me")
 				.and()
 				.method(HttpMethod.GET)
 				.filters(f ->
-					f.filter(new headerFilter(jwtServices)))
+					f.stripPrefix(1)
+					.filter(new headerFilter(jwtServices)))
 				.uri("http://localhost:10451/info-me"))
 				.route("administrador-buscar-curriculum",p ->
 				p.path("/curriculum/me")

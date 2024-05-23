@@ -19,7 +19,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.StructuredTaskScope;
 import java.util.concurrent.StructuredTaskScope.Subtask;
@@ -66,6 +65,7 @@ public class PostulacionService {
 		postulacion.setUsuario(Usuario.builder().id(id).build());
 		postulacion.setEstadoPostulacion(EstadoPostulacion.recibida);
 		postulacion.setFecha_postulacion(Timestamp.from(Instant.now()));
+		System.out.println(id+" "+oferta);
 
 		try (var scope = new StructuredTaskScope<>()) {
 			Subtask<UUID> ofertaCarrera = scope.fork(() -> 
@@ -73,7 +73,7 @@ public class PostulacionService {
 			Subtask<UUID> usuarioCarrera = scope.fork(() -> 
 				usuarioRepository.getIdCarreraByUsuario(id));
 			scope.join();
-
+			System.out.println(postulacion.getUsuario().getCarrera()+" "+ofertaCarrera.get());
 			if (usuarioCarrera.get().equals(ofertaCarrera.get())) {
 				postulacionRepository.save(postulacion);
 				PostulacionEmail email = getPostulacionEmail(postulacion, id);
@@ -189,8 +189,9 @@ public class PostulacionService {
 		}
 	}
 	// Listar postulaciones de un usurio
-	public Optional<Postulacion> getPostulacionesById(UUID Id) {
-		return postulacionRepository.findById(Id);
+	public List<Postulacion> getPostulacionesById(UUID Id) {
+		Usuario usuario= new Usuario(Id);
+		return postulacionRepository.findByUsuario(usuario);
 	}
 	
 	public PostulacionEmail getPostulacionEmail(Postulacion post,UUID id) {

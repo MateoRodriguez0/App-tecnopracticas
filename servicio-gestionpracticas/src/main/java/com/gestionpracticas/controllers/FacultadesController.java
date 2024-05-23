@@ -4,7 +4,6 @@ import com.gestionpracticas.model.Carreras;
 import com.gestionpracticas.model.Facultades;
 import com.gestionpracticas.services.FacultadesService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +14,6 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/facultades")
-@CrossOrigin(origins = "*")
 public class FacultadesController {
 
     @Autowired

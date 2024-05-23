@@ -32,4 +32,4 @@ server:
   port: 10450
 tecnopracticas:
   domain: '*'
-  pahts-permiteall: /auth/login,/auth/refresh,/usuarios/restablecer-clave,/usuarios/registrar,/usuarios/verificar
+  pahts-permiteall: /auth/login,/auth/refresh,/usuarios/restablecer-clave,/usuarios/registrar,/usuarios/verificar,/carreras
